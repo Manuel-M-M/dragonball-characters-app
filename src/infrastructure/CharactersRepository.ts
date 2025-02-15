@@ -8,4 +8,12 @@ export class CharactersRepository {
     }
     return response.json();
   }
+
+  async getCharacterById(id: number) {
+    const response = await fetch(`${this.apiUrl}/${id}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch character with ID ${id}`);
+    }
+    return response.json();
+  }
 }
