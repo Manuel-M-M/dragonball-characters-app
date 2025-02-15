@@ -11,9 +11,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "types": ["jest", "node"],
-    "resolveJsonModule": true, // Para importar archivos JSON si lo necesitas en el futuro
-    "isolatedModules": true, // Asegura compatibilidad con Babel y ts-jest
-    "forceConsistentCasingInFileNames": true // Evita problemas de case-sensitive en imports
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }
