@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "es2015"],
-    "module": "esnext",
+    "target": "es6",
+    "lib": ["DOM", "ESNext"],
+    "module": "CommonJS",
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "outDir": "./dist",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["jest", "node"],
+    "resolveJsonModule": true, // Para importar archivos JSON si lo necesitas en el futuro
+    "isolatedModules": true, // Asegura compatibilidad con Babel y ts-jest
+    "forceConsistentCasingInFileNames": true // Evita problemas de case-sensitive en imports
   },
   "include": ["src"]
 }
