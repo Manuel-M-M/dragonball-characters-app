@@ -5,11 +5,7 @@ import App from './App';
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
+  root.render(<App />);
 } else {
   console.error('No se encontró el elemento root en el HTML.');
 }
