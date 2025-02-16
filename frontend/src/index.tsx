@@ -1,13 +1,15 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-
-const App = () => {
-  return <h1>Dragon Ball Characters App</h1>;
-};
+import App from './App';
 
 const container = document.getElementById('root');
 if (container) {
   const root = createRoot(container);
-  root.render(<App />);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
 } else {
   console.error('No se encontró el elemento root en el HTML.');
 }

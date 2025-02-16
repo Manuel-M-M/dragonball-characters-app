@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
+import { CharactersService } from '../../application/CharactersService';
+import { CharacterList } from '../../components/CharacterList/CharacterList';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
-import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
-import styled from 'styled-components';
-
-const ListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 20px;
-`;
 
 export const CharactersListPage = () => {
   const [characters, setCharacters] = useState<
@@ -20,8 +13,8 @@ export const CharactersListPage = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const repo = new CharactersRepository();
-        const response = await repo.getCharacters();
+        const service = new CharactersService(new CharactersRepository());
+        const response = await service.getCharacters();
         setCharacters(response.items);
       } catch (err) {
         setError('Failed to fetch characters');
@@ -32,15 +25,10 @@ export const CharactersListPage = () => {
 
     fetchCharacters();
   }, []);
+  console.log('characters', { characters });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  return (
-    <ListContainer>
-      {characters.map((char) => (
-        <CharacterCard key={char.id} name={char.name} image={char.image} />
-      ))}
-    </ListContainer>
-  );
+  return <CharacterList characters={characters} />;
 };
