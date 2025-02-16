@@ -9,9 +9,13 @@ describe('CharacterCard', () => {
     image: 'https://dragonball-api.com/characters/goku.png',
   };
 
-  test('renders character name and image', () => {
+  test('renders character id, name and image', () => {
     render(
-      <CharacterCard name={mockCharacter.name} image={mockCharacter.image} />,
+      <CharacterCard
+        id={mockCharacter.id}
+        name={mockCharacter.name}
+        image={mockCharacter.image}
+      />,
     );
 
     expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
@@ -22,7 +26,11 @@ describe('CharacterCard', () => {
 
   test('renders a favorite icon', () => {
     render(
-      <CharacterCard name={mockCharacter.name} image={mockCharacter.image} />,
+      <CharacterCard
+        id={mockCharacter.id}
+        name={mockCharacter.name}
+        image={mockCharacter.image}
+      />,
     );
 
     expect(screen.getByTestId('favorite-icon')).toBeInTheDocument();

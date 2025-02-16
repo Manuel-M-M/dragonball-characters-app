@@ -25,7 +25,6 @@ export const CharactersListPage = () => {
 
     fetchCharacters();
   }, []);
-  console.log('characters', { characters });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

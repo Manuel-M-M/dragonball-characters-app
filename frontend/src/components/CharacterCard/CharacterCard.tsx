@@ -36,11 +36,13 @@ const Name = styled.p`
   margin: 0;
 `;
 interface CharacterCardProps {
+  id: number;
   name: string;
   image: string;
 }
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({
+  id,
   name,
   image,
 }) => {
@@ -49,7 +51,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
       <Image src={image} alt={name} />
       <InfoContainer>
         <Name>{name}</Name>
-        <CharacterHeartIcon />
+        <CharacterHeartIcon characterId={id} />
       </InfoContainer>
     </Card>
   );

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { CharacterHeartIcon } from './CharacterHeartIcon';
 
 test('toggles heart icon on click', () => {
-  render(<CharacterHeartIcon />);
+  render(<CharacterHeartIcon characterId={0} />);
   const heartIcon = screen.getByTestId('heart-icon');
 
   expect(heartIcon.querySelector('svg')).toHaveAttribute('fill', 'none');

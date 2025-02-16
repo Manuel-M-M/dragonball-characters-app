@@ -29,7 +29,12 @@ export const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   return (
     <CharactersListWrapper>
       {characters.map((char) => (
-        <CharacterCard key={char.id} name={char.name} image={char.image} />
+        <CharacterCard
+          id={char.id}
+          key={char.id}
+          name={char.name}
+          image={char.image}
+        />
       ))}
     </CharactersListWrapper>
   );
