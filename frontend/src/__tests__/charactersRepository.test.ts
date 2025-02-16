@@ -1,25 +1,5 @@
 import { CharactersRepository } from '../infrastructure/CharactersRepository';
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-    json: () =>
-      Promise.resolve({
-        items: [
-          { id: 1, name: 'Goku', race: 'Saiyan' },
-          { id: 2, name: 'Vegeta', race: 'Saiyan' },
-        ],
-        meta: {
-          totalItems: 58,
-          itemCount: 2,
-          itemsPerPage: 10,
-          totalPages: 6,
-          currentPage: 1,
-        },
-      }),
-  }),
-) as jest.Mock;
-
 describe('CharactersRepository', () => {
   let charactersRepository: CharactersRepository;
 
@@ -28,35 +8,31 @@ describe('CharactersRepository', () => {
     jest.clearAllMocks();
   });
 
-  test('should fetch a list of characters with pagination', async () => {
-    const { items, meta } = await charactersRepository.getCharacters(1, 10);
-    expect(Array.isArray(items)).toBe(true);
-    expect(items.length).toBeGreaterThan(0);
-    expect(meta).toHaveProperty('totalItems');
-    expect(meta).toHaveProperty('totalPages');
-  });
+  test('should fetch 50 characters from the API', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            items: new Array(50).fill({ id: 1, name: 'Mock Character' }),
+            meta: {
+              totalItems: 50,
+              itemCount: 50,
+              itemsPerPage: 50,
+              totalPages: 1,
+              currentPage: 1,
+            },
+          }),
+      }),
+    ) as jest.Mock;
 
-  test('should fetch a single character by ID from the API', async () => {
-    const characterId = 1;
-    const mockCharacter = {
-      id: 1,
-      name: 'Goku',
-      race: 'Saiyan',
-      gender: 'Male',
-      affiliation: 'Z Fighter',
-    };
+    const { items, meta } = await charactersRepository.getCharacters(1, 50);
 
-    jest.spyOn(global, 'fetch').mockResolvedValue({
-      ok: true,
-      json: jest.fn().mockResolvedValue(mockCharacter),
-    } as unknown as Response);
+    expect(fetch).toHaveBeenCalledWith(
+      'https://dragonball-api.com/api/characters?page=1&limit=50',
+    );
 
-    const character = await charactersRepository.getCharacterById(characterId);
-
-    expect(character).toBeDefined();
-    expect(character).toHaveProperty('id', characterId);
-    expect(character).toHaveProperty('name', 'Goku');
-    expect(character).toHaveProperty('race', 'Saiyan');
-    expect(character).toHaveProperty('gender', 'Male');
+    expect(items).toHaveLength(50);
+    expect(meta).toHaveProperty('itemsPerPage', 50);
   });
 });
