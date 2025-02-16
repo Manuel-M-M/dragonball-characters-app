@@ -7,7 +7,7 @@ export class CharactersService {
     this.charactersRepo = charactersRepo;
   }
 
-  async getCharacters(page = 1, limit = 10) {
+  async getCharacters(page = 1, limit = 50) {
     return this.charactersRepo.getCharacters(page, limit);
   }
 
