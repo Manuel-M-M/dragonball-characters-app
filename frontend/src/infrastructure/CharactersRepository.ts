@@ -1,14 +1,8 @@
 export class CharactersRepository {
-  private readonly apiUrl =
-    'https://api.allorigins.win/raw?url=https://dragonball-api.com/api/characters';
+  private readonly apiUrl = 'http://localhost:5000/api/characters';
 
   async getCharacters(page = 1, limit = 10) {
-    const response = await fetch(this.apiUrl, {
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    });
-
+    const response = await fetch(this.apiUrl);
     if (!response.ok) {
       throw new Error('Failed to fetch characters');
     }
