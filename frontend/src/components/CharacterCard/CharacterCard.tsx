@@ -1,43 +1,56 @@
-import React from 'react';
 import styled from 'styled-components';
+import { CharacterHeartIcon } from '../CharacterHeartIcon/CharacterHeartIcon';
 
+const Card = styled.div`
+  width: 188.57px;
+  min-width: 172.5px;
+  height: 245.97px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: black;
+  border-radius: 0 0 20px 0;
+  padding: 10px;
+  position: relative;
+`;
+
+const Image = styled.img`
+  width: 188.57px;
+  height: 189.97px;
+  border-bottom: 4px solid red;
+`;
+
+const InfoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 0 0 20px 0;
+`;
+
+const Name = styled.p`
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
+  color: white;
+  margin: 0;
+`;
 interface CharacterCardProps {
   name: string;
   image: string;
 }
-
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  width: 150px;
-  background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-`;
-
-const CharacterImage = styled.img`
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-`;
-
-const CharacterName = styled.h3`
-  margin-top: 10px;
-  font-size: 16px;
-  text-align: center;
-`;
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({
   name,
   image,
 }) => {
   return (
-    <Card data-testid="character-card">
-      <CharacterImage src={image} alt={name} />
-      <CharacterName>{name}</CharacterName>
+    <Card>
+      <Image src={image} alt={name} />
+      <InfoContainer>
+        <Name>{name}</Name>
+        <CharacterHeartIcon />
+      </InfoContainer>
     </Card>
   );
 };
