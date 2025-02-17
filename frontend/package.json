@@ -220,6 +220,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-is": "^17.0.2",
+    "react-router-dom": "^7.1.5",
     "rechoir": "^0.8.0",
     "redent": "^3.0.0",
     "regenerator-runtime": "^0.14.1",
