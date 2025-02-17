@@ -1,5 +1,6 @@
 import { useFavoritesStore } from '../../store/favoritesStore';
 import styled from 'styled-components';
+import { useCallback } from 'react';
 
 const HeartIconContainer = styled.div<{ $isFavorite: boolean }>`
   width: 12px;
@@ -16,11 +17,6 @@ const HeartIconContainer = styled.div<{ $isFavorite: boolean }>`
       fill 0.2s ease-in-out,
       stroke 0.2s ease-in-out;
   }
-
-  &:hover svg {
-    fill: #ec1d24;
-    stroke: #ec1d24;
-  }
 `;
 
 interface CharacterHeartIconProps {
@@ -32,19 +28,31 @@ export const CharacterHeartIcon: React.FC<CharacterHeartIconProps> = ({
 }) => {
   const addFavorite = useFavoritesStore((state) => state.addFavorite);
   const removeFavorite = useFavoritesStore((state) => state.removeFavorite);
-  const isFavorite = useFavoritesStore((state) => state.isFavorite);
+  const isFavorite = useFavoritesStore((state) =>
+    state.isFavorite(characterId),
+  );
 
-  const toggleFavorite = () => {
-    isFavorite(characterId)
-      ? removeFavorite(characterId)
-      : addFavorite(characterId);
-  };
+  console.log(`Rendering CharacterHeartIcon for ID: ${characterId}`);
+  console.log(`Is favorite? ${isFavorite}`);
+
+  const toggleFavorite = useCallback(() => {
+    console.log(`🖱 Clicked on Character ID: ${characterId}`);
+
+    if (isFavorite) {
+      console.log(`Removing favorite: Character ID ${characterId}`);
+      removeFavorite(characterId);
+    } else {
+      console.log(`Adding favorite: Character ID ${characterId}`);
+      addFavorite(characterId);
+    }
+
+    console.log(
+      `Total favorites: ${useFavoritesStore.getState().favorites.length}`,
+    );
+  }, [isFavorite, characterId, addFavorite, removeFavorite]);
 
   return (
-    <HeartIconContainer
-      $isFavorite={isFavorite(characterId)}
-      onClick={toggleFavorite}
-    >
+    <HeartIconContainer $isFavorite={isFavorite} onClick={toggleFavorite}>
       <svg
         width="12"
         height="10.84"

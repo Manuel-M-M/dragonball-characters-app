@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react';
 import { CharactersService } from '../../application/CharactersService';
 import { CharacterList } from '../../components/CharacterList/CharacterList';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
+import styled from 'styled-components';
+
+const CharactersListContainer = styled.section`
+  width: 100%;
+  margin: 0 auto; /* Centramos */
+  padding: 16px 48px;
+`;
 
 export const CharactersListPage = () => {
   const [characters, setCharacters] = useState<
@@ -29,5 +36,9 @@ export const CharactersListPage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  return <CharacterList characters={characters} />;
+  return (
+    <CharactersListContainer>
+      <CharacterList characters={characters} />
+    </CharactersListContainer>
+  );
 };
