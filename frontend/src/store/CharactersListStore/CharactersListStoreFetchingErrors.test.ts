@@ -2,21 +2,36 @@ import { act, waitFor } from '@testing-library/react';
 import { useCharacterListStore } from '../../store/CharactersListStore/CharactersListStore';
 import { CharactersService } from '../../application/CharactersService';
 
-jest.mock('../../application/CharactersService', () => ({
-  CharactersService: jest.fn().mockImplementation(() => ({
-    getCharacters: jest.fn().mockResolvedValue({
-      items: [
-        { id: 1, name: 'Goku', image: '/images/characters/goku.webp' },
-        { id: 2, name: 'Vegeta', image: '/images/characters/vegeta.webp' },
-      ],
+jest.mock('../../application/CharactersService', () => {
+  return {
+    CharactersService: jest.fn().mockReturnValue({
+      getCharacters: jest.fn().mockResolvedValue({
+        items: [
+          { id: 1, name: 'Goku', image: '/images/characters/goku.webp' },
+          { id: 2, name: 'Vegeta', image: '/images/characters/vegeta.webp' },
+          { id: 3, name: 'Gohan', image: '/images/characters/gohan.webp' },
+        ],
+      }),
     }),
-  })),
-}));
+  };
+});
 
 describe('CharacterList Store', () => {
   beforeEach(() => {
     useCharacterListStore.setState({
       characters: [],
+      filteredCharacters: [],
+      loading: false,
+      error: '',
+    });
+
+    jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    useCharacterListStore.setState({
+      characters: [],
+      filteredCharacters: [],
       loading: false,
       error: '',
     });
@@ -33,6 +48,7 @@ describe('CharacterList Store', () => {
       expect(useCharacterListStore.getState().characters).toEqual([
         { id: 1, name: 'Goku', image: '/images/characters/goku.webp' },
         { id: 2, name: 'Vegeta', image: '/images/characters/vegeta.webp' },
+        { id: 3, name: 'Gohan', image: '/images/characters/gohan.webp' },
       ]);
     });
   });
