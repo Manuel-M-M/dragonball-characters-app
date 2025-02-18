@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import { CharacterList } from '../../components/CharacterList/CharacterList';
+import { Loader } from '../../components/Loader/Loader';
 
 export const FavoritesListPage = () => {
   const { favoriteCharacters, loading, error, fetchFavorites } =
@@ -10,7 +11,7 @@ export const FavoritesListPage = () => {
     fetchFavorites();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   return (

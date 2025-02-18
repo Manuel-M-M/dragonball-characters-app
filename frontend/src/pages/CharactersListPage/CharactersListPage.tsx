@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useCharacterListStore } from '../../store/CharactersListStore/CharactersListStore';
 import { CharacterList } from '../../components/CharacterList/CharacterList';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { Loader } from '../../components/Loader/Loader';
 import styled from 'styled-components';
 
 const CharactersListContainer = styled.section`
@@ -19,7 +20,7 @@ export const CharactersListPage = () => {
     fetchCharacters();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
   return (
