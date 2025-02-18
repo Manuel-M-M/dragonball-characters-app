@@ -1,5 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { render, screen, waitFor } from '@testing-library/react';
 import { CharactersListPage } from './CharactersListPage';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
 

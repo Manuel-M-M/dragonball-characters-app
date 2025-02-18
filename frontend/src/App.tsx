@@ -7,11 +7,10 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { CharactersListPage } from './pages/CharactersListPage/CharactersListPage';
-// import { FavoritesListPage } from './pages/FavoritesListPage/FavoritesListPage';
+import { FavoritesListPage } from './pages/FavoritesListPage/FavoritesListPage';
 // import { CharacterDetailsPage } from './pages/CharacterDetailsPage/CharacterDetailsPage';
 import { GlobalStyles } from './styles/globalStyles';
 import { Header } from './components/Header/Header';
-import { FavoritesListPage } from './pages/FavoritesListPage/FavoritesListPage';
 
 const AppContainer = styled.div`
   width: 100%;

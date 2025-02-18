@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import { useFavoritesStore } from '../store/favoritesStore';
 
 jest.mock('../application/CharactersService', () => ({
@@ -22,60 +22,64 @@ describe('Favorites Store', () => {
     });
   });
 
-  it('should add a character to favorites', () => {
-    const { result } = renderHook(() => useFavoritesStore());
+  it('should add a character to favorites', async () => {
+    const store = useFavoritesStore.getState();
 
     act(() => {
-      result.current.addFavorite(1);
+      store.addFavorite(1);
     });
 
-    expect(result.current.favorites).toContain(1);
+    await waitFor(() => {
+      expect(useFavoritesStore.getState().favorites).toContain(1);
+    });
   });
 
-  it('should remove a character from favorites', () => {
-    const { result } = renderHook(() => useFavoritesStore());
+  it('should remove a character from favorites', async () => {
+    const store = useFavoritesStore.getState();
 
     act(() => {
-      result.current.addFavorite(1);
-      result.current.removeFavorite(1);
+      store.addFavorite(1);
+      store.removeFavorite(1);
     });
 
-    expect(result.current.favorites).not.toContain(1);
+    await waitFor(() => {
+      expect(useFavoritesStore.getState().favorites).not.toContain(1);
+    });
   });
 
   it('should fetch favorite characters from the API', async () => {
-    const { result } = renderHook(() => useFavoritesStore());
+    const store = useFavoritesStore.getState();
 
     act(() => {
-      result.current.addFavorite(1);
+      store.addFavorite(1);
     });
 
     await act(async () => {
-      await result.current.fetchFavorites();
+      await store.fetchFavorites();
     });
 
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
+    await waitFor(() => {
+      expect(useFavoritesStore.getState().favoriteCharacters).toEqual([
+        { id: 1, name: 'Character 1', image: '/images/characters/1.webp' },
+      ]);
     });
-
-    expect(result.current.favoriteCharacters).toEqual([
-      { id: 1, name: 'Character 1', image: '/images/characters/1.webp' },
-    ]);
   });
 
-  it('should return true if a character is a favorite', () => {
-    const { result } = renderHook(() => useFavoritesStore());
+  it('should return true if a character is a favorite', async () => {
+    const store = useFavoritesStore.getState();
 
     act(() => {
-      result.current.addFavorite(1);
+      store.addFavorite(1);
     });
 
-    expect(result.current.isFavorite(1)).toBe(true);
+    await waitFor(() => {
+      expect(useFavoritesStore.getState().isFavorite(1)).toBe(true);
+    });
   });
 
-  it('should return false if a character is not a favorite', () => {
-    const { result } = renderHook(() => useFavoritesStore());
-
-    expect(result.current.isFavorite(2)).toBe(false);
+  it('should return false if a character is not a favorite', async () => {
+    await waitFor(() => {
+      expect(useFavoritesStore.getState().isFavorite(2)).toBe(false);
+    });
   });
 });

@@ -32,27 +32,20 @@ export const CharacterHeartIcon: React.FC<CharacterHeartIconProps> = ({
     state.isFavorite(characterId),
   );
 
-  console.log(`Rendering CharacterHeartIcon for ID: ${characterId}`);
-  console.log(`Is favorite? ${isFavorite}`);
-
   const toggleFavorite = useCallback(() => {
-    console.log(`🖱 Clicked on Character ID: ${characterId}`);
-
     if (isFavorite) {
-      console.log(`Removing favorite: Character ID ${characterId}`);
       removeFavorite(characterId);
     } else {
-      console.log(`Adding favorite: Character ID ${characterId}`);
       addFavorite(characterId);
     }
-
-    console.log(
-      `Total favorites: ${useFavoritesStore.getState().favorites.length}`,
-    );
   }, [isFavorite, characterId, addFavorite, removeFavorite]);
 
   return (
-    <HeartIconContainer $isFavorite={isFavorite} onClick={toggleFavorite}>
+    <HeartIconContainer
+      data-testid="favorite-icon"
+      $isFavorite={isFavorite}
+      onClick={toggleFavorite}
+    >
       <svg
         width="12"
         height="10.84"

@@ -62,12 +62,10 @@ export const useFavoritesStore = create<FavoritesState>((set, get) => ({
         return;
       }
 
-      console.log('Fetching all characters...');
       const service = new CharactersService(new CharactersRepository());
       const response = await service.getCharacters();
       const allCharacters = response.items || [];
 
-      console.log('Filtering favorite characters:', favorites);
       const favoriteData = allCharacters.filter((char: { id: number }) =>
         favorites.includes(char.id),
       );

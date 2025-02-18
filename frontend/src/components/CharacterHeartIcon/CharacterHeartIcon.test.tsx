@@ -1,16 +1,38 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { CharacterHeartIcon } from './CharacterHeartIcon';
+import { useFavoritesStore } from '../../store/favoritesStore';
 
-test('toggles heart icon on click', () => {
-  render(<CharacterHeartIcon characterId={0} />);
-  const heartIcon = screen.getByTestId('heart-icon');
+describe('CharacterHeartIcon', () => {
+  beforeEach(() => {
+    useFavoritesStore.setState({
+      favorites: [],
+      addFavorite: jest.fn((id) =>
+        useFavoritesStore.setState((state) => ({
+          favorites: [...state.favorites, id],
+        })),
+      ),
+      removeFavorite: jest.fn((id) =>
+        useFavoritesStore.setState((state) => ({
+          favorites: state.favorites.filter((favId) => favId !== id),
+        })),
+      ),
+      isFavorite: (id) => useFavoritesStore.getState().favorites.includes(id),
+    });
+  });
 
-  expect(heartIcon.querySelector('svg')).toHaveAttribute('fill', 'none');
+  test('toggles favorite state on click', () => {
+    const characterId = 1;
+    render(<CharacterHeartIcon characterId={characterId} />);
 
-  fireEvent.click(heartIcon);
-  expect(heartIcon.querySelector('svg')).toHaveAttribute('fill', '#EC1D24');
+    const heartIconContainer = screen.getByTestId('favorite-icon');
 
-  fireEvent.click(heartIcon);
-  expect(heartIcon.querySelector('svg')).toHaveAttribute('fill', 'none');
+    expect(useFavoritesStore.getState().isFavorite(characterId)).toBe(false);
+
+    fireEvent.click(heartIconContainer);
+    expect(useFavoritesStore.getState().isFavorite(characterId)).toBe(true);
+
+    fireEvent.click(heartIconContainer);
+    expect(useFavoritesStore.getState().isFavorite(characterId)).toBe(false);
+  });
 });
