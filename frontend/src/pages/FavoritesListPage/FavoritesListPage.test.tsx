@@ -53,7 +53,7 @@ describe('FavoritesListPage', () => {
 
     render(<FavoritesListPage />);
 
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
   });
 
   it('should display error message if fetching fails', async () => {

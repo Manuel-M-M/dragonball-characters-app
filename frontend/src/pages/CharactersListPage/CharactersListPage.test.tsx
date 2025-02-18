@@ -29,7 +29,7 @@ describe('CharactersListPage', () => {
     );
 
     render(<CharactersListPage />);
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
   });
 
   test('renders character list when API call succeeds', async () => {
