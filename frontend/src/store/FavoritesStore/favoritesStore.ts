@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { CharactersService } from '../application/CharactersService';
-import { CharactersRepository } from '../infrastructure/CharactersRepository';
+import { CharactersService } from '../../application/CharactersService';
+import { CharactersRepository } from '../../infrastructure/CharactersRepository';
 
 interface Character {
   id: number;

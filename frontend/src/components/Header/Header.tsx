@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useFavoritesStore } from '../../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 
 const Navbar = styled.nav`
   height: 100%;

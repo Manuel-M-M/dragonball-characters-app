@@ -1,4 +1,4 @@
-import { useFavoritesStore } from '../../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import styled from 'styled-components';
 import { useCallback } from 'react';
 

@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { FavoritesListPage } from '../../pages/FavoritesListPage/FavoritesListPage';
-import { useFavoritesStore } from '../../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import { act } from 'react';
 
-jest.mock('../../store/favoritesStore', () => ({
+jest.mock('../../store/FavoritesStore/favoritesStore', () => ({
   useFavoritesStore: jest.fn(),
 }));
 

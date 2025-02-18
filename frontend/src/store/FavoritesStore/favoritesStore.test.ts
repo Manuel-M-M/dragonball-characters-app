@@ -1,7 +1,7 @@
 import { act, waitFor } from '@testing-library/react';
-import { useFavoritesStore } from '../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 
-jest.mock('../application/CharactersService', () => ({
+jest.mock('../../application/CharactersService', () => ({
   CharactersService: jest.fn().mockImplementation(() => ({
     getCharacters: jest.fn().mockResolvedValue({
       items: [

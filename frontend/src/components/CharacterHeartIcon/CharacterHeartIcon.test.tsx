@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { CharacterHeartIcon } from './CharacterHeartIcon';
-import { useFavoritesStore } from '../../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 
 describe('CharacterHeartIcon', () => {
   beforeEach(() => {

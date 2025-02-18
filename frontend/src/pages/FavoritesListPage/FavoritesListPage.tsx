@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useFavoritesStore } from '../../store/favoritesStore';
+import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import { CharacterList } from '../../components/CharacterList/CharacterList';
 
 export const FavoritesListPage = () => {
