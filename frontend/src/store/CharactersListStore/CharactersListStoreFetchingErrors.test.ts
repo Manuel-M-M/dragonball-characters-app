@@ -28,18 +28,18 @@ describe('CharacterList Store', () => {
     jest.clearAllMocks();
   });
 
-  afterEach(() => {
-    useCharacterListStore.setState({
-      characters: [],
-      filteredCharacters: [],
-      loading: false,
-      error: '',
-    });
-  });
+  const store = useCharacterListStore.getState();
+
+  // afterEach(() => {
+  //   useCharacterListStore.setState({
+  //     characters: [],
+  //     filteredCharacters: [],
+  //     loading: false,
+  //     error: '',
+  //   });
+  // });
 
   it('should fetch characters from the API', async () => {
-    const store = useCharacterListStore.getState();
-
     await act(async () => {
       await store.fetchCharacters();
     });
@@ -54,8 +54,6 @@ describe('CharacterList Store', () => {
   });
 
   it('should set loading to true while fetching', async () => {
-    const store = useCharacterListStore.getState();
-
     act(() => {
       store.fetchCharacters();
     });
@@ -67,8 +65,6 @@ describe('CharacterList Store', () => {
     (CharactersService as jest.Mock).mockImplementation(() => ({
       getCharacters: jest.fn().mockRejectedValue(new Error('Network error')),
     }));
-
-    const store = useCharacterListStore.getState();
 
     await act(async () => {
       await store.fetchCharacters();

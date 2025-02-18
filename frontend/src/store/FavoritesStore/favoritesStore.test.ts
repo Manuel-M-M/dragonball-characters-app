@@ -22,9 +22,9 @@ describe('Favorites Store', () => {
     });
   });
 
-  it('should add a character to favorites', async () => {
-    const store = useFavoritesStore.getState();
+  const store = useFavoritesStore.getState();
 
+  it('should add a character to favorites', async () => {
     act(() => {
       store.addFavorite(1);
     });
@@ -35,8 +35,6 @@ describe('Favorites Store', () => {
   });
 
   it('should remove a character from favorites', async () => {
-    const store = useFavoritesStore.getState();
-
     act(() => {
       store.addFavorite(1);
       store.removeFavorite(1);
@@ -48,8 +46,6 @@ describe('Favorites Store', () => {
   });
 
   it('should fetch favorite characters from the API', async () => {
-    const store = useFavoritesStore.getState();
-
     act(() => {
       store.addFavorite(1);
     });
@@ -66,8 +62,6 @@ describe('Favorites Store', () => {
   });
 
   it('should return true if a character is a favorite', async () => {
-    const store = useFavoritesStore.getState();
-
     act(() => {
       store.addFavorite(1);
     });

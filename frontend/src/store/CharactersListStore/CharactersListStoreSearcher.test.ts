@@ -27,9 +27,9 @@ describe('CharacterList Store - Searching', () => {
     jest.clearAllMocks();
   });
 
-  it('should filter characters by search term', async () => {
-    const store = useCharacterListStore.getState();
+  const store = useCharacterListStore.getState();
 
+  it('should filter characters by search term', async () => {
     await act(async () => {
       await store.fetchCharacters();
     });
@@ -52,8 +52,6 @@ describe('CharacterList Store - Searching', () => {
   });
 
   it('should return all characters if search term is empty', async () => {
-    const store = useCharacterListStore.getState();
-
     await act(async () => {
       await store.fetchCharacters();
     });
@@ -72,8 +70,6 @@ describe('CharacterList Store - Searching', () => {
   });
 
   it('should return an empty array if no characters match the search', async () => {
-    const store = useCharacterListStore.getState();
-
     await act(async () => {
       await store.fetchCharacters();
     });
@@ -88,8 +84,6 @@ describe('CharacterList Store - Searching', () => {
   });
 
   it('should return characters that match a partial search term', async () => {
-    const store = useCharacterListStore.getState();
-
     await act(async () => {
       await store.fetchCharacters();
     });
