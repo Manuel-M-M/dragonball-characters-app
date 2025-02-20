@@ -5,13 +5,32 @@ import { CharactersService } from '../../application/CharactersService';
 jest.mock('../../application/CharactersService', () => {
   return {
     CharactersService: jest.fn().mockReturnValue({
-      getCharacters: jest.fn().mockResolvedValue({
-        items: [
-          { id: 1, name: 'Goku', image: '/images/characters/goku.webp' },
-          { id: 2, name: 'Vegeta', image: '/images/characters/vegeta.webp' },
-          { id: 3, name: 'Gohan', image: '/images/characters/gohan.webp' },
-        ],
-      }),
+      getCharacters: jest.fn().mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve({
+                items: [
+                  {
+                    id: 1,
+                    name: 'Goku',
+                    image: '/images/characters/goku.webp',
+                  },
+                  {
+                    id: 2,
+                    name: 'Vegeta',
+                    image: '/images/characters/vegeta.webp',
+                  },
+                  {
+                    id: 3,
+                    name: 'Gohan',
+                    image: '/images/characters/gohan.webp',
+                  },
+                ],
+              });
+            }, 500);
+          }),
+      ),
     }),
   };
 });
@@ -45,11 +64,17 @@ describe('CharacterList Store', () => {
   });
 
   it('should set loading to true while fetching', async () => {
-    act(() => {
+    await act(async () => {
       store.fetchCharacters();
     });
 
-    expect(useCharacterListStore.getState().loading).toBe(true);
+    await waitFor(() => {
+      expect(useCharacterListStore.getState().loading).toBe(true);
+    });
+
+    await waitFor(() => {
+      expect(useCharacterListStore.getState().loading).toBe(false);
+    });
   });
 
   it('should set an error message if fetching fails', async () => {
