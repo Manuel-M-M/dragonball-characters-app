@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -8,13 +8,13 @@ import {
 } from 'react-router-dom';
 import { CharactersListPage } from './pages/CharactersListPage/CharactersListPage';
 import { FavoritesListPage } from './pages/FavoritesListPage/FavoritesListPage';
-// import { CharacterDetailsPage } from './pages/CharacterDetailsPage/CharacterDetailsPage';
+import { CharacterDetailsPage } from './pages/CharacterDetailsPage/CharacterDetailsPage';
 import { GlobalStyles } from './styles/globalStyles';
 import { Header } from './components/Header/Header';
 
 const AppContainer = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 1182px
   background-color: #f0f0f0; // Color tomado de Figma
   display: flex;
   flex-direction: column;
@@ -24,22 +24,34 @@ const AppContainer = styled.div`
 const MainContent = styled.main`
   flex: 1;
   width: 100%;
-  padding: 16px 48px; // Basado en el diseño de Figma
   justify-content: center;
 `;
+
+import { useLocation } from 'react-router-dom';
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <GlobalStyles />
-      <AppContainer>
+      <AppContainer className="AppContainer">
         <Header />
-        <MainContent>
+        <MainContent className="MainContent-App">
           <Routes>
             <Route path="/" element={<Navigate to="/characters" />} />
             <Route path="/characters" element={<CharactersListPage />} />
             <Route path="/favorites" element={<FavoritesListPage />} />
-            {/* <Route path="/character/:id" element={<CharacterDetailsPage />} /> */}
+            <Route path="/character/:id" element={<CharacterDetailsPage />} />
           </Routes>
         </MainContent>
       </AppContainer>
