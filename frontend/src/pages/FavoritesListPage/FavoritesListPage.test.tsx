@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { FavoritesListPage } from '../../pages/FavoritesListPage/FavoritesListPage';
 import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
-import { act } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../store/FavoritesStore/favoritesStore', () => ({
   useFavoritesStore: jest.fn(),
@@ -22,7 +22,11 @@ describe('FavoritesListPage', () => {
       fetchFavorites: jest.fn(),
     });
 
-    render(<FavoritesListPage />);
+    render(
+      <MemoryRouter>
+        <FavoritesListPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('Goku')).toBeInTheDocument();
     expect(screen.getByText('Vegeta')).toBeInTheDocument();
@@ -36,7 +40,11 @@ describe('FavoritesListPage', () => {
       fetchFavorites: jest.fn(),
     });
 
-    render(<FavoritesListPage />);
+    render(
+      <MemoryRouter>
+        <FavoritesListPage />
+      </MemoryRouter>,
+    );
 
     expect(
       screen.getByText('No favorite characters selected.'),
@@ -51,7 +59,11 @@ describe('FavoritesListPage', () => {
       fetchFavorites: jest.fn(),
     });
 
-    render(<FavoritesListPage />);
+    render(
+      <MemoryRouter>
+        <FavoritesListPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
   });
@@ -64,7 +76,11 @@ describe('FavoritesListPage', () => {
       fetchFavorites: jest.fn(),
     });
 
-    render(<FavoritesListPage />);
+    render(
+      <MemoryRouter>
+        <FavoritesListPage />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('Failed to fetch favorites')).toBeInTheDocument();
   });
@@ -80,7 +96,11 @@ describe('FavoritesListPage', () => {
     });
 
     await act(async () => {
-      render(<FavoritesListPage />);
+      render(
+        <MemoryRouter>
+          <FavoritesListPage />
+        </MemoryRouter>,
+      );
     });
 
     expect(mockFetchFavorites).toHaveBeenCalled();

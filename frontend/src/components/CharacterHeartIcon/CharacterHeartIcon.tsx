@@ -2,9 +2,13 @@ import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import styled from 'styled-components';
 import { useCallback } from 'react';
 
+interface CharacterHeartIconProps {
+  characterId: number;
+}
+
 const HeartIconContainer = styled.div<{ $isFavorite: boolean }>`
-  width: 12px;
-  height: 10.84px;
+  width: 24px;
+  height: 22.84px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,10 +22,6 @@ const HeartIconContainer = styled.div<{ $isFavorite: boolean }>`
       stroke 0.2s ease-in-out;
   }
 `;
-
-interface CharacterHeartIconProps {
-  characterId: number;
-}
 
 export const CharacterHeartIcon: React.FC<CharacterHeartIconProps> = ({
   characterId,

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import { CharacterHeartIcon } from '../CharacterHeartIcon/CharacterHeartIcon';
+import { Link } from 'react-router-dom';
+
+interface CharacterCardProps {
+  id: number;
+  name: string;
+  image: string;
+}
 
 const Card = styled.div`
   width: 188.57px;
@@ -9,9 +16,16 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   background: black;
-  border-radius: 0 0 20px 0;
   padding: 10px;
   position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 96%, 92% 100%, 0 100%);
+`;
+
+const ImageLink = styled(Link)`
+  width: 188.57px;
+  height: 189.97px;
+  display: block;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
@@ -26,7 +40,6 @@ const InfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  border-radius: 0 0 20px 0;
 `;
 
 const Name = styled.p`
@@ -35,11 +48,6 @@ const Name = styled.p`
   color: white;
   margin: 0;
 `;
-interface CharacterCardProps {
-  id: number;
-  name: string;
-  image: string;
-}
 
 export const CharacterCard: React.FC<CharacterCardProps> = ({
   id,
@@ -48,7 +56,9 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
 }) => {
   return (
     <Card>
-      <Image src={image} alt={name} />
+      <ImageLink to={`/character/${id}`}>
+        <Image src={image} alt={name} />
+      </ImageLink>
       <InfoContainer>
         <Name>{name}</Name>
         <CharacterHeartIcon characterId={id} />

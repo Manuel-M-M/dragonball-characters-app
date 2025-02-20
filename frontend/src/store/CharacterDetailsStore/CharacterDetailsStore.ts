@@ -1,13 +1,7 @@
 import { create } from 'zustand';
 import { CharactersService } from '../../application/CharactersService';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
-
-interface Character {
-  id: number;
-  name: string;
-  image: string;
-  description: string;
-}
+import { Character } from '../../interfaces';
 
 interface CharacterDetailsState {
   character: Character | null;
@@ -15,6 +9,8 @@ interface CharacterDetailsState {
   error: string;
   fetchCharacterById: (id: number) => Promise<void>;
 }
+
+const service = new CharactersService(new CharactersRepository());
 
 export const useCharacterDetailsStore = create<CharacterDetailsState>(
   (set) => ({
@@ -26,10 +22,21 @@ export const useCharacterDetailsStore = create<CharacterDetailsState>(
       set({ loading: true, error: '' });
 
       try {
-        const service = new CharactersService(new CharactersRepository());
-        const character = await service.getCharacterById(id);
+        const response = await service.getCharacterById(id);
 
-        set({ character, loading: false });
+        if (
+          response &&
+          typeof response === 'object' &&
+          !Array.isArray(response)
+        ) {
+          set({ character: response, loading: false });
+        } else {
+          set({
+            character: null,
+            loading: false,
+            error: 'Character not found',
+          });
+        }
       } catch (error) {
         set({ character: null, loading: false, error: 'Failed to fetch' });
       }

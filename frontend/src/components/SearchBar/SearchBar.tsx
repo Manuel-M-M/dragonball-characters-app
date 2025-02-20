@@ -3,6 +3,10 @@ import { useCharacterListStore } from '../../store/CharactersListStore/Character
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 
+interface SearchBarProps {
+  resultsCount: number;
+}
+
 const SearchContainer = styled.div`
   width: 100%;
   max-width: 1416px;
@@ -57,10 +61,6 @@ const SearchCounter = styled.span`
   line-height: 14.06px;
   letter-spacing: 0;
 `;
-
-interface SearchBarProps {
-  resultsCount: number;
-}
 
 export const SearchBar: React.FC<SearchBarProps> = ({ resultsCount }) => {
   const { searchCharacters } = useCharacterListStore();

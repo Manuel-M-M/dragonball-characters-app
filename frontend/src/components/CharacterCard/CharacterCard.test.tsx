@@ -1,6 +1,10 @@
-import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { CharacterDetailsPage } from '../../pages/CharacterDetailsPage/CharacterDetailsPage';
 import { CharacterCard } from './CharacterCard';
+import { useCharacterDetailsStore } from '../../store/CharacterDetailsStore/CharacterDetailsStore';
 
 describe('CharacterCard', () => {
   const mockCharacter = {
@@ -9,13 +13,24 @@ describe('CharacterCard', () => {
     image: 'https://dragonball-api.com/characters/goku.png',
   };
 
-  test('renders character id, name and image', () => {
+  beforeEach(() => {
+    useCharacterDetailsStore.setState({
+      character: null,
+      loading: false,
+      error: '',
+      fetchCharacterById: jest.fn(),
+    });
+  });
+
+  it('renders character id, name and image', () => {
     render(
-      <CharacterCard
-        id={mockCharacter.id}
-        name={mockCharacter.name}
-        image={mockCharacter.image}
-      />,
+      <MemoryRouter>
+        <CharacterCard
+          id={mockCharacter.id}
+          name={mockCharacter.name}
+          image={mockCharacter.image}
+        />
+      </MemoryRouter>,
     );
 
     expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
@@ -24,15 +39,54 @@ describe('CharacterCard', () => {
     expect(img).toHaveAttribute('alt', mockCharacter.name);
   });
 
-  test('renders a favorite icon', () => {
+  it('renders a favorite icon', () => {
     render(
-      <CharacterCard
-        id={mockCharacter.id}
-        name={mockCharacter.name}
-        image={mockCharacter.image}
-      />,
+      <MemoryRouter>
+        <CharacterCard
+          id={mockCharacter.id}
+          name={mockCharacter.name}
+          image={mockCharacter.image}
+        />
+      </MemoryRouter>,
     );
 
     expect(screen.getByTestId('favorite-icon')).toBeInTheDocument();
+  });
+
+  it('should navigate to the character details page when clicking the image', async () => {
+    useCharacterDetailsStore.setState({
+      character: {
+        id: 1,
+        name: 'Goku',
+        image: 'goku.webp',
+        description: 'Saiyan warrior',
+        transformations: [],
+      },
+      loading: false,
+      error: '',
+    });
+
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route
+            path="/"
+            element={<CharacterCard id={1} name="Goku" image="goku.webp" />}
+          />
+          <Route path="/character/:id" element={<CharacterDetailsPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const image = screen.getByAltText('Goku');
+    expect(image).toBeInTheDocument();
+
+    console.log('👉 Clicking on image...');
+    await userEvent.click(image);
+
+    console.log('🔎 Checking for character name in details page...');
+    await waitFor(() => {
+      expect(screen.getByText('Goku')).toBeInTheDocument();
+    });
   });
 });

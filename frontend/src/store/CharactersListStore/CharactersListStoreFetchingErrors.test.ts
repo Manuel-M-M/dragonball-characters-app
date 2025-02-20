@@ -30,15 +30,6 @@ describe('CharacterList Store', () => {
 
   const store = useCharacterListStore.getState();
 
-  // afterEach(() => {
-  //   useCharacterListStore.setState({
-  //     characters: [],
-  //     filteredCharacters: [],
-  //     loading: false,
-  //     error: '',
-  //   });
-  // });
-
   it('should fetch characters from the API', async () => {
     await act(async () => {
       await store.fetchCharacters();

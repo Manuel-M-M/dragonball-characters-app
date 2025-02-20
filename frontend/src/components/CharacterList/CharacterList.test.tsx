@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { CharacterList } from './CharacterList';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('CharacterList', () => {
   const mockCharacters = Array.from({ length: 50 }, (_, i) => ({
@@ -10,14 +11,22 @@ describe('CharacterList', () => {
   }));
 
   test('renders a list of 50 character cards', () => {
-    render(<CharacterList characters={mockCharacters} />);
+    render(
+      <MemoryRouter>
+        <CharacterList characters={mockCharacters} />
+      </MemoryRouter>,
+    );
 
     expect(screen.getAllByRole('img')).toHaveLength(50);
     expect(screen.getAllByText(/Character \d+/)).toHaveLength(50);
   });
 
   test('renders a message when the list is empty', () => {
-    render(<CharacterList characters={[]} />);
+    render(
+      <MemoryRouter>
+        <CharacterList characters={[]} />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('No characters available')).toBeInTheDocument();
   });

@@ -1,6 +1,10 @@
 import { CharacterCard } from '../CharacterCard/CharacterCard';
 import styled from 'styled-components';
 
+interface CharacterListProps {
+  characters: { id: number; name: string; image: string }[];
+}
+
 const CharactersListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));
@@ -17,9 +21,6 @@ const NoCharacters = styled.p`
   color: gray;
   margin-top: 20px;
 `;
-interface CharacterListProps {
-  characters: { id: number; name: string; image: string }[];
-}
 
 export const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   if (!characters.length) {
@@ -27,7 +28,7 @@ export const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   }
 
   return (
-    <CharactersListWrapper>
+    <CharactersListWrapper className="CharactersListWrapper">
       {characters.map((char) =>
         char?.id && char?.name && char?.image ? (
           <CharacterCard

@@ -1,12 +1,7 @@
 import { create } from 'zustand';
 import { CharactersService } from '../../application/CharactersService';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
-
-interface Character {
-  id: number;
-  name: string;
-  image: string;
-}
+import { Character } from '../../interfaces';
 
 interface FavoritesState {
   favorites: number[];

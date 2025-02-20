@@ -29,7 +29,7 @@ describe('CharactersRepository', () => {
     const { items, meta } = await charactersRepository.getCharacters(1, 50);
 
     expect(fetch).toHaveBeenCalledWith(
-      'https://dragonball-api.com/api/characters?page=1&limit=50',
+      'http://localhost:5000/api/characters?page=1&limit=50',
     );
 
     expect(items).toHaveLength(50);

@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { CharactersListPage } from './CharactersListPage';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../infrastructure/CharactersRepository');
 
@@ -28,7 +29,11 @@ describe('CharactersListPage', () => {
       new Promise(() => {}),
     );
 
-    render(<CharactersListPage />);
+    render(
+      <MemoryRouter>
+        <CharactersListPage />
+      </MemoryRouter>,
+    );
     expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
   });
 
@@ -46,7 +51,11 @@ describe('CharactersListPage', () => {
       },
     });
 
-    render(<CharactersListPage />);
+    render(
+      <MemoryRouter>
+        <CharactersListPage />
+      </MemoryRouter>,
+    );
 
     await waitFor(() => expect(screen.getByText('Goku')).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText('Vegeta')).toBeInTheDocument());
@@ -57,7 +66,11 @@ describe('CharactersListPage', () => {
       CharactersRepository.prototype.getCharacters as jest.Mock
     ).mockRejectedValue(new Error('Failed to fetch characters'));
 
-    render(<CharactersListPage />);
+    render(
+      <MemoryRouter>
+        <CharactersListPage />
+      </MemoryRouter>,
+    );
 
     await waitFor(() =>
       expect(

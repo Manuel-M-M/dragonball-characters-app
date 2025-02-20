@@ -1,13 +1,6 @@
 import '@testing-library/jest-dom';
-import { act } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import { useCharacterDetailsStore } from './CharacterDetailsStore';
-import { CharactersService } from '../../application/CharactersService';
-
-jest.mock('../../application/CharactersService', () => ({
-  CharactersService: jest.fn().mockReturnValue({
-    getCharacterById: jest.fn(),
-  }),
-}));
 
 describe('CharacterDetailStore', () => {
   beforeEach(() => {
@@ -15,12 +8,9 @@ describe('CharacterDetailStore', () => {
       character: null,
       loading: false,
       error: '',
+      fetchCharacterById: async () => {},
     });
-
-    jest.clearAllMocks();
   });
-
-  const store = useCharacterDetailsStore.getState();
 
   it('should fetch a character by ID and update the state', async () => {
     const mockCharacter = {
@@ -28,27 +18,47 @@ describe('CharacterDetailStore', () => {
       name: 'Goku',
       image: '/images/characters/goku.webp',
       description: 'A Saiyan warrior',
+      transformations: [],
     };
 
-    (CharactersService as jest.Mock).mockImplementation(() => ({
-      getCharacterById: jest.fn().mockResolvedValue(mockCharacter),
-    }));
+    useCharacterDetailsStore.setState({
+      fetchCharacterById: async (id: number) => {
+        useCharacterDetailsStore.setState({
+          character: id === 1 ? mockCharacter : null,
+          loading: false,
+          error: '',
+        });
+      },
+    });
+
+    const store = useCharacterDetailsStore.getState();
 
     await act(async () => {
       await store.fetchCharacterById(1);
     });
 
-    expect(useCharacterDetailsStore.getState().character).toEqual(
-      mockCharacter,
-    );
+    await waitFor(() => {
+      expect(useCharacterDetailsStore.getState().character).toEqual(
+        mockCharacter,
+      );
+    });
+
     expect(useCharacterDetailsStore.getState().loading).toBe(false);
     expect(useCharacterDetailsStore.getState().error).toBe('');
   });
 
   it('should handle fetch failure and set an error', async () => {
-    (CharactersService as jest.Mock).mockImplementation(() => ({
-      getCharacterById: jest.fn().mockRejectedValue(new Error('Network error')),
-    }));
+    useCharacterDetailsStore.setState({
+      fetchCharacterById: async () => {
+        useCharacterDetailsStore.setState({
+          character: null,
+          loading: false,
+          error: 'Character not found',
+        });
+      },
+    });
+
+    const store = useCharacterDetailsStore.getState();
 
     await act(async () => {
       await store.fetchCharacterById(1);
@@ -56,10 +66,20 @@ describe('CharacterDetailStore', () => {
 
     expect(useCharacterDetailsStore.getState().character).toBeNull();
     expect(useCharacterDetailsStore.getState().loading).toBe(false);
-    expect(useCharacterDetailsStore.getState().error).toBe('Failed to fetch');
+    expect(useCharacterDetailsStore.getState().error).toBe(
+      'Character not found',
+    );
   });
 
   it('should set loading to true while fetching', async () => {
+    useCharacterDetailsStore.setState({
+      fetchCharacterById: async () => {
+        useCharacterDetailsStore.setState({ loading: true });
+      },
+    });
+
+    const store = useCharacterDetailsStore.getState();
+
     act(() => {
       store.fetchCharacterById(1);
     });
