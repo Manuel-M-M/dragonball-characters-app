@@ -10,7 +10,9 @@ const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 48px;
+  padding-left: 48px;
+  padding-right: 68px;
+  margin-bottom: 16px;
 `;
 
 const SearchWrapper = styled.div`
@@ -26,7 +28,7 @@ const SearchIcon = styled(FaSearch)`
   font-size: 12px;
   font-weight: 400;
   line-height: 12px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 `;
 
 const SearchInput = styled.input`
@@ -37,9 +39,9 @@ const SearchInput = styled.input`
   font-size: 16px;
   font-weight: 400;
   color: black;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   line-height: 18.75px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   text-transform: uppercase;
 
   &::placeholder {
@@ -53,13 +55,15 @@ const SearchCounter = styled.span`
   font-size: 12px;
   font-weight: 400;
   line-height: 14.06px;
-  letter-spacing: 0%;
+  letter-spacing: 0;
 `;
 
-export const SearchBar: React.FC = () => {
-  const { filteredCharacters, searchCharacters } = useCharacterListStore();
+interface SearchBarProps {
+  resultsCount: number;
+}
 
-  const characterResults: string = `${filteredCharacters.length} RESULTS`;
+export const SearchBar: React.FC<SearchBarProps> = ({ resultsCount }) => {
+  const { searchCharacters } = useCharacterListStore();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.toUpperCase();
@@ -67,7 +71,7 @@ export const SearchBar: React.FC = () => {
   };
 
   return (
-    <SearchContainer>
+    <SearchContainer className="SearchContainer">
       <SearchWrapper>
         <SearchIcon />
         <SearchInput
@@ -76,7 +80,7 @@ export const SearchBar: React.FC = () => {
           onChange={handleSearch}
         />
       </SearchWrapper>
-      <SearchCounter>{characterResults}</SearchCounter>
+      <SearchCounter>{resultsCount} RESULTS</SearchCounter>
     </SearchContainer>
   );
 };

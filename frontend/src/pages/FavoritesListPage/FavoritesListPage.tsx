@@ -2,6 +2,37 @@ import { useEffect } from 'react';
 import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 import { CharacterList } from '../../components/CharacterList/CharacterList';
 import { Loader } from '../../components/Loader/Loader';
+import { styled } from 'styled-components';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+
+const FavoritesListPageContainer = styled.div`
+  width: 100%;
+  max-width: 1416px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+  padding: 84px 0;
+  padding-top: 48px;
+`;
+
+const Title = styled.h2`
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-left: 48px;
+`;
+
+const NoFavoritesAndErrorMessage = styled.p`
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #999;
+  margin-top: 200px;
+`;
 
 export const FavoritesListPage = () => {
   const { favoriteCharacters, loading, error, fetchFavorites } =
@@ -12,15 +43,20 @@ export const FavoritesListPage = () => {
   }, []);
 
   if (loading) return <Loader />;
-  if (error) return <p>{error}</p>;
+  if (error)
+    return <NoFavoritesAndErrorMessage>{error}</NoFavoritesAndErrorMessage>;
 
   return (
-    <div>
+    <FavoritesListPageContainer className="FavoritesListPageContainer">
+      <Title className="tITTLE">FAVORITES</Title>
+      <SearchBar resultsCount={favoriteCharacters.length} />
       {favoriteCharacters.length > 0 ? (
         <CharacterList characters={favoriteCharacters} />
       ) : (
-        <p>No favorite characters selected.</p>
+        <NoFavoritesAndErrorMessage>
+          No favorite characters selected.
+        </NoFavoritesAndErrorMessage>
       )}
-    </div>
+    </FavoritesListPageContainer>
   );
 };
