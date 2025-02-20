@@ -14,8 +14,4 @@ export class CharactersService {
   async getCharacterById(id: number) {
     return this.charactersRepo.getCharacterById(id);
   }
-
-  async getCharactersByIds(ids: number[]) {
-    return this.charactersRepo.getCharactersByIds(ids);
-  }
 }
