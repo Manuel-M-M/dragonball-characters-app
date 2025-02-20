@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { CharactersService } from '../../application/CharactersService';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
 import { Character } from '../../interfaces';
+import { CacheManager } from '../../utils/cache';
 
 interface CharacterListState {
   characters: Character[];

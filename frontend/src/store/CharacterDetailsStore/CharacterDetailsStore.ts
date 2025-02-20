@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { CharactersService } from '../../application/CharactersService';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
 import { Character } from '../../interfaces';
+import { CacheManager } from '../../utils/cache';
 
 interface CharacterDetailsState {
   character: Character | null;
@@ -21,9 +22,18 @@ export const useCharacterDetailsStore = create<CharacterDetailsState>(
     fetchCharacterById: async (id: number) => {
       set({ loading: true, error: '' });
 
+      const cacheKey = `character-${id}`;
+      const cachedCharacter = CacheManager.getCache<Character>(
+        cacheKey,
+        24 * 60 * 60 * 1000,
+      );
+      if (cachedCharacter) {
+        set({ character: cachedCharacter, loading: false });
+        return;
+      }
+
       try {
         const response = await service.getCharacterById(id);
-
         if (
           response &&
           typeof response === 'object' &&
