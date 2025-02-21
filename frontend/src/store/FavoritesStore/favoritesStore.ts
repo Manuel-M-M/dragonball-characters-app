@@ -41,9 +41,7 @@ export const useFavoritesStore = create<FavoritesState>((set, get) => ({
   removeFavorite: (id: number) => {
     set((state) => ({
       favorites: state.favorites.filter((fav) => fav !== id),
-      favoriteCharacters: state.favoriteCharacters.filter(
-        (char) => char.id !== id,
-      ),
+      favoriteCharacters: state.favoriteCharacters.filter((char) => char.id !== id),
     }));
   },
 
@@ -62,11 +60,11 @@ export const useFavoritesStore = create<FavoritesState>((set, get) => ({
       const allCharacters = response.items || [];
 
       const favoriteData = allCharacters.filter((char: { id: number }) =>
-        favorites.includes(char.id),
+        favorites.includes(char.id)
       );
 
       set({ favoriteCharacters: favoriteData, loading: false });
-    } catch (error) {
+    } catch {
       set({ error: 'Failed to fetch favorite characters', loading: false });
     }
   },

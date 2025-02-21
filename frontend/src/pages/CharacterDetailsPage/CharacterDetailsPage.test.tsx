@@ -3,6 +3,15 @@ import { act, render, screen } from '@testing-library/react';
 import { CharacterDetailsPage } from './CharacterDetailsPage';
 import { useCharacterDetailsStore } from '../../store/CharacterDetailsStore/CharacterDetailsStore';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+  breakpoints: {
+    sm: '480px',
+    md: '768px',
+    lg: '1024px',
+  },
+};
 
 jest.mock('../../store/CharacterDetailsStore/CharacterDetailsStore', () => ({
   useCharacterDetailsStore: jest.fn(),
@@ -20,11 +29,13 @@ describe('CharacterDetailsPage', () => {
     });
 
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CharacterDetailsPage />} />
-        </Routes>
-      </MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CharacterDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     expect(await screen.findByText('Goku')).toBeInTheDocument();
@@ -40,11 +51,13 @@ describe('CharacterDetailsPage', () => {
     });
 
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CharacterDetailsPage />} />
-        </Routes>
-      </MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CharacterDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     expect(screen.getByLabelText('Loading...')).toBeInTheDocument();
@@ -59,11 +72,13 @@ describe('CharacterDetailsPage', () => {
     });
 
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<CharacterDetailsPage />} />
-        </Routes>
-      </MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<CharacterDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     expect(screen.getByText('Failed to fetch character')).toBeInTheDocument();
@@ -81,11 +96,13 @@ describe('CharacterDetailsPage', () => {
 
     await act(async () => {
       render(
-        <MemoryRouter initialEntries={['/character/1']}>
-          <Routes>
-            <Route path="/character/:id" element={<CharacterDetailsPage />} />
-          </Routes>
-        </MemoryRouter>
+        <ThemeProvider theme={theme}>
+          <MemoryRouter initialEntries={['/character/1']}>
+            <Routes>
+              <Route path="/character/:id" element={<CharacterDetailsPage />} />
+            </Routes>
+          </MemoryRouter>
+        </ThemeProvider>
       );
     });
 

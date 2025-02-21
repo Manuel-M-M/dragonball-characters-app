@@ -50,7 +50,7 @@ const FavoritesCount = styled.span`
 
 export const Header = () => {
   const navigate = useNavigate();
-  const favoritesCount = useFavoritesStore((state) => state.favorites.length);
+  const favoritesCount = useFavoritesStore((state) => state.favorites?.length ?? 0);
 
   return (
     <Navbar>

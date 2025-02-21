@@ -5,6 +5,15 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { CharacterDetailsPage } from '../../pages/CharacterDetailsPage/CharacterDetailsPage';
 import { CharacterCard } from './CharacterCard';
 import { useCharacterDetailsStore } from '../../store/CharacterDetailsStore/CharacterDetailsStore';
+import { ThemeProvider } from 'styled-components';
+
+const theme = {
+  breakpoints: {
+    sm: '480px',
+    md: '768px',
+    lg: '1024px',
+  },
+};
 
 describe('CharacterCard', () => {
   const mockCharacter = {
@@ -22,15 +31,17 @@ describe('CharacterCard', () => {
     });
   });
 
+  const renderWithTheme = (ui: React.ReactElement) => {
+    return render(
+      <ThemeProvider theme={theme}>
+        <MemoryRouter>{ui}</MemoryRouter>
+      </ThemeProvider>
+    );
+  };
+
   it('renders character id, name and image', () => {
-    render(
-      <MemoryRouter>
-        <CharacterCard
-          id={mockCharacter.id}
-          name={mockCharacter.name}
-          image={mockCharacter.image}
-        />
-      </MemoryRouter>
+    renderWithTheme(
+      <CharacterCard id={mockCharacter.id} name={mockCharacter.name} image={mockCharacter.image} />
     );
 
     expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
@@ -40,14 +51,8 @@ describe('CharacterCard', () => {
   });
 
   it('renders a favorite icon', () => {
-    render(
-      <MemoryRouter>
-        <CharacterCard
-          id={mockCharacter.id}
-          name={mockCharacter.name}
-          image={mockCharacter.image}
-        />
-      </MemoryRouter>
+    renderWithTheme(
+      <CharacterCard id={mockCharacter.id} name={mockCharacter.name} image={mockCharacter.image} />
     );
 
     expect(screen.getByTestId('favorite-icon')).toBeInTheDocument();
@@ -67,12 +72,14 @@ describe('CharacterCard', () => {
     });
 
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<CharacterCard id={1} name="Goku" image="goku.webp" />} />
-          <Route path="/character/:id" element={<CharacterDetailsPage />} />
-        </Routes>
-      </MemoryRouter>
+      <ThemeProvider theme={theme}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<CharacterCard id={1} name="Goku" image="goku.webp" />} />
+            <Route path="/character/:id" element={<CharacterDetailsPage />} />
+          </Routes>
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const image = screen.getByAltText('Goku');
