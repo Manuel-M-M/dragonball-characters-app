@@ -25,7 +25,7 @@ describe('FavoritesListPage', () => {
     render(
       <MemoryRouter>
         <FavoritesListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Goku')).toBeInTheDocument();
@@ -43,12 +43,10 @@ describe('FavoritesListPage', () => {
     render(
       <MemoryRouter>
         <FavoritesListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
-    expect(
-      screen.getByText('No favorite characters selected.'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('No favorite characters selected.')).toBeInTheDocument();
   });
 
   it('should display loading state', async () => {
@@ -62,7 +60,7 @@ describe('FavoritesListPage', () => {
     render(
       <MemoryRouter>
         <FavoritesListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
@@ -79,7 +77,7 @@ describe('FavoritesListPage', () => {
     render(
       <MemoryRouter>
         <FavoritesListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Failed to fetch favorites')).toBeInTheDocument();
@@ -99,7 +97,7 @@ describe('FavoritesListPage', () => {
       render(
         <MemoryRouter>
           <FavoritesListPage />
-        </MemoryRouter>,
+        </MemoryRouter>
       );
     });
 

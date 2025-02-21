@@ -25,8 +25,7 @@ const ErrorMessage = styled.p`
 `;
 
 export const CharactersListPage = () => {
-  const { filteredCharacters, loading, error, fetchCharacters } =
-    useCharacterListStore();
+  const { filteredCharacters, loading, error, fetchCharacters } = useCharacterListStore();
 
   useEffect(() => {
     fetchCharacters();

@@ -1,5 +1,7 @@
 export class CacheManager {
-  static setCache(key: string, data: any, ttl: number) {
+  private static DEFAULT_TTL = 24 * 60 * 60 * 1000;
+
+  static setCache<T>(key: string, data: T, ttl: number = this.DEFAULT_TTL) {
     const now = Date.now();
     const cacheData = {
       data,
@@ -8,7 +10,7 @@ export class CacheManager {
     localStorage.setItem(key, JSON.stringify(cacheData));
   }
 
-  static getCache<T>(key: string, ttl: number): T | null {
+  static getCache<T>(key: string): T | null {
     const cachedItem = localStorage.getItem(key);
     if (!cachedItem) return null;
 

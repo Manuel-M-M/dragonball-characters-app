@@ -33,7 +33,7 @@ const HeartIcon = styled.div`
   cursor: pointer;
 
   svg {
-    fill: #ec1d24; // Siempre rojo
+    fill: #ec1d24;
     stroke: #ec1d24;
     width: 24px;
     height: 21.68px;

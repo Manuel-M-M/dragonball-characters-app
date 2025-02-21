@@ -1,28 +1,23 @@
 import React, { lazy, useEffect, Suspense } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { GlobalStyles } from './styles/globalStyles';
 import { Header } from './components/Header/Header';
 
 const CharactersListPage = lazy(() =>
   import('./pages/CharactersListPage/CharactersListPage').then((m) => ({
     default: m.CharactersListPage,
-  })),
+  }))
 );
 const FavoritesListPage = lazy(() =>
   import('./pages/FavoritesListPage/FavoritesListPage').then((m) => ({
     default: m.FavoritesListPage,
-  })),
+  }))
 );
 const CharacterDetailsPage = lazy(() =>
   import('./pages/CharacterDetailsPage/CharacterDetailsPage').then((m) => ({
     default: m.CharacterDetailsPage,
-  })),
+  }))
 );
 
 const theme = {
@@ -36,7 +31,7 @@ const theme = {
 const AppContainer = styled.div`
   width: 100%;
   height: 1182px
-  background-color: #f0f0f0; // Color tomado de Figma
+  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;

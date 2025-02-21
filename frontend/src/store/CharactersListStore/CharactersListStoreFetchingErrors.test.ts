@@ -29,7 +29,7 @@ jest.mock('../../application/CharactersService', () => {
                 ],
               });
             }, 500);
-          }),
+          })
       ),
     }),
   };
@@ -87,9 +87,7 @@ describe('CharacterList Store', () => {
     });
 
     await waitFor(() => {
-      expect(useCharacterListStore.getState().error).toBe(
-        'Failed to fetch characters',
-      );
+      expect(useCharacterListStore.getState().error).toBe('Failed to fetch characters');
     });
   });
 });

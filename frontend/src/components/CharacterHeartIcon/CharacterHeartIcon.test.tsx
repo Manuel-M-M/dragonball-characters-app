@@ -10,12 +10,12 @@ describe('CharacterHeartIcon', () => {
       addFavorite: jest.fn((id) =>
         useFavoritesStore.setState((state) => ({
           favorites: [...state.favorites, id],
-        })),
+        }))
       ),
       removeFavorite: jest.fn((id) =>
         useFavoritesStore.setState((state) => ({
           favorites: state.favorites.filter((favId) => favId !== id),
-        })),
+        }))
       ),
       isFavorite: (id) => useFavoritesStore.getState().favorites.includes(id),
     });

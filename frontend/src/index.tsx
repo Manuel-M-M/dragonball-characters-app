@@ -28,7 +28,7 @@ if (container) {
   root.render(
     <Suspense fallback={<Loader />}>
       <App />
-    </Suspense>,
+    </Suspense>
   );
 } else {
   console.error('❌ No se encontró el elemento root en el HTML.');

@@ -26,21 +26,19 @@ describe('CharactersListPage', () => {
 
   test('renders loading state initially', () => {
     (CharactersRepository.prototype.getCharacters as jest.Mock).mockReturnValue(
-      new Promise(() => {}),
+      new Promise(() => {})
     );
 
     render(
       <MemoryRouter>
         <CharactersListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
   });
 
   test('renders character list when API call succeeds', async () => {
-    (
-      CharactersRepository.prototype.getCharacters as jest.Mock
-    ).mockResolvedValue({
+    (CharactersRepository.prototype.getCharacters as jest.Mock).mockResolvedValue({
       items: mockCharacters,
       meta: {
         totalItems: 2,
@@ -54,7 +52,7 @@ describe('CharactersListPage', () => {
     render(
       <MemoryRouter>
         <CharactersListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     await waitFor(() => expect(screen.getByText('Goku')).toBeInTheDocument());
@@ -62,20 +60,18 @@ describe('CharactersListPage', () => {
   });
 
   test('renders error message when API call fails', async () => {
-    (
-      CharactersRepository.prototype.getCharacters as jest.Mock
-    ).mockRejectedValue(new Error('Failed to fetch characters'));
+    (CharactersRepository.prototype.getCharacters as jest.Mock).mockRejectedValue(
+      new Error('Failed to fetch characters')
+    );
 
     render(
       <MemoryRouter>
         <CharactersListPage />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     await waitFor(() =>
-      expect(
-        screen.getByText(/failed to fetch characters/i),
-      ).toBeInTheDocument(),
+      expect(screen.getByText(/failed to fetch characters/i)).toBeInTheDocument()
     );
   });
 });

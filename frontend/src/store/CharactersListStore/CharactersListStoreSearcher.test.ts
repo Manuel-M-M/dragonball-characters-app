@@ -35,9 +35,7 @@ describe('CharacterList Store - Searching', () => {
     });
 
     await waitFor(() => {
-      expect(
-        useCharacterListStore.getState().characters.length,
-      ).toBeGreaterThan(0);
+      expect(useCharacterListStore.getState().characters.length).toBeGreaterThan(0);
     });
 
     act(() => {

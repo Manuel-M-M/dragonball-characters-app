@@ -57,7 +57,6 @@ const TransformationList = styled.div`
     border-radius: 3px;
   }
 `;
-// overflow-x: auto;
 
 const TransformationCard = styled.div`
   flex: 0 0 auto;
@@ -85,12 +84,11 @@ const KiText = styled.p`
   color: gray;
 `;
 
-export const CharacterTransformation: React.FC<
-  CharacterTransformationProps
-> = ({ transformations }) => {
+export const CharacterTransformation: React.FC<CharacterTransformationProps> = ({
+  transformations,
+}) => {
   const sortedTransformations = [...transformations].sort(
-    (a, b) =>
-      parseFloat(b.ki.replace(/\D/g, '')) - parseFloat(a.ki.replace(/\D/g, '')),
+    (a, b) => parseFloat(b.ki.replace(/\D/g, '')) - parseFloat(a.ki.replace(/\D/g, ''))
   );
 
   return (
@@ -98,10 +96,7 @@ export const CharacterTransformation: React.FC<
       <Title className="Title">Transformations</Title>
       <TransformationList className="TransformationList">
         {sortedTransformations.map((transformation) => (
-          <TransformationCard
-            key={transformation.id}
-            className="TransformationCard"
-          >
+          <TransformationCard key={transformation.id} className="TransformationCard">
             <TransformationImage
               src={transformation.image}
               alt={transformation.name}

@@ -25,21 +25,15 @@ const NoTransformationsMessage = styled.p`
   margin-top: 200px;
 `;
 
-export const CharacterDetails: React.FC<CharacterDetailsProps> = ({
-  character,
-}) => (
+export const CharacterDetails: React.FC<CharacterDetailsProps> = ({ character }) => (
   <DetailsContainer className="DetailsContainer">
     {character ? (
       <>
         <CharacterResume character={character} />
         {character.transformations && character.transformations.length > 0 ? (
-          <CharacterTransformation
-            transformations={character.transformations}
-          />
+          <CharacterTransformation transformations={character.transformations} />
         ) : (
-          <NoTransformationsMessage>
-            No transformations available
-          </NoTransformationsMessage>
+          <NoTransformationsMessage>No transformations available</NoTransformationsMessage>
         )}
       </>
     ) : (

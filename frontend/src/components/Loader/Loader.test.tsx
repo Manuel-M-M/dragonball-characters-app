@@ -12,9 +12,6 @@ describe('Loader Component', () => {
   it('should have a spinning animation', () => {
     render(<Loader />);
     const loader = screen.getByLabelText(/loading/i);
-    expect(loader).toHaveStyleRule(
-      'animation',
-      expect.stringMatching(/infinite/),
-    );
+    expect(loader).toHaveStyleRule('animation', expect.stringMatching(/infinite/));
   });
 });

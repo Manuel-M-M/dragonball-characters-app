@@ -49,11 +49,7 @@ const Name = styled.p`
   margin: 0;
 `;
 
-export const CharacterCard: React.FC<CharacterCardProps> = ({
-  id,
-  name,
-  image,
-}) => {
+export const CharacterCard: React.FC<CharacterCardProps> = ({ id, name, image }) => {
   return (
     <Card>
       <ImageLink to={`/character/${id}`}>

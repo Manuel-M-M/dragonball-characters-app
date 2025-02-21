@@ -23,14 +23,12 @@ describe('CharactersRepository', () => {
               currentPage: 1,
             },
           }),
-      }),
+      })
     ) as jest.Mock;
 
     const { items, meta } = await charactersRepository.getCharacters(1, 50);
 
-    expect(fetch).toHaveBeenCalledWith(
-      'http://localhost:5000/api/characters?page=1&limit=50',
-    );
+    expect(fetch).toHaveBeenCalledWith('http://localhost:5000/api/characters?page=1&limit=50');
 
     expect(items).toHaveLength(50);
     expect(meta).toHaveProperty('itemsPerPage', 50);

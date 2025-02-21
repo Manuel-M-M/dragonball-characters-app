@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { CharacterDetailsPage } from './CharacterDetailsPage';
 import { useCharacterDetailsStore } from '../../store/CharacterDetailsStore/CharacterDetailsStore';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -24,7 +24,7 @@ describe('CharacterDetailsPage', () => {
         <Routes>
           <Route path="/character/:id" element={<CharacterDetailsPage />} />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(await screen.findByText('Goku')).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('CharacterDetailsPage', () => {
         <Routes>
           <Route path="/character/:id" element={<CharacterDetailsPage />} />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByLabelText('Loading...')).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('CharacterDetailsPage', () => {
         <Routes>
           <Route path="/character/:id" element={<CharacterDetailsPage />} />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Failed to fetch character')).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe('CharacterDetailsPage', () => {
           <Routes>
             <Route path="/character/:id" element={<CharacterDetailsPage />} />
           </Routes>
-        </MemoryRouter>,
+        </MemoryRouter>
       );
     });
 

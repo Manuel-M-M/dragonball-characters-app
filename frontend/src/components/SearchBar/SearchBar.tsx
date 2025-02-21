@@ -74,11 +74,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ resultsCount }) => {
     <SearchContainer className="SearchContainer">
       <SearchWrapper>
         <SearchIcon />
-        <SearchInput
-          type="text"
-          placeholder="SEARCH A CHARACTER..."
-          onChange={handleSearch}
-        />
+        <SearchInput type="text" placeholder="SEARCH A CHARACTER..." onChange={handleSearch} />
       </SearchWrapper>
       <SearchCounter>{resultsCount} RESULTS</SearchCounter>
     </SearchContainer>

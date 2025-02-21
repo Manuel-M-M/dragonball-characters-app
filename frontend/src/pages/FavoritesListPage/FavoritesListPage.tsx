@@ -35,16 +35,14 @@ const NoFavoritesAndErrorMessage = styled.p`
 `;
 
 export const FavoritesListPage = () => {
-  const { favoriteCharacters, loading, error, fetchFavorites } =
-    useFavoritesStore();
+  const { favoriteCharacters, loading, error, fetchFavorites } = useFavoritesStore();
 
   useEffect(() => {
     fetchFavorites();
   }, []);
 
   if (loading) return <Loader />;
-  if (error)
-    return <NoFavoritesAndErrorMessage>{error}</NoFavoritesAndErrorMessage>;
+  if (error) return <NoFavoritesAndErrorMessage>{error}</NoFavoritesAndErrorMessage>;
 
   return (
     <FavoritesListPageContainer className="FavoritesListPageContainer">
@@ -53,9 +51,7 @@ export const FavoritesListPage = () => {
       {favoriteCharacters.length > 0 ? (
         <CharacterList characters={favoriteCharacters} />
       ) : (
-        <NoFavoritesAndErrorMessage>
-          No favorite characters selected.
-        </NoFavoritesAndErrorMessage>
+        <NoFavoritesAndErrorMessage>No favorite characters selected.</NoFavoritesAndErrorMessage>
       )}
     </FavoritesListPageContainer>
   );

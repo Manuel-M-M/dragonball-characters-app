@@ -24,8 +24,7 @@ const ErrorMessage = styled.p`
 
 export const CharacterDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { character, loading, error, fetchCharacterById } =
-    useCharacterDetailsStore();
+  const { character, loading, error, fetchCharacterById } = useCharacterDetailsStore();
 
   const stableFetchCharacterById = useCallback(() => {
     if (id && (!character || character.id !== Number(id))) {

@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { CharactersService } from '../../application/CharactersService';
 import { CharactersRepository } from '../../infrastructure/CharactersRepository';
 import { Character } from '../../interfaces';
-import { CacheManager } from '../../utils/cache';
 
 interface CharacterListState {
   characters: Character[];
@@ -32,7 +31,7 @@ export const useCharacterListStore = create<CharacterListState>((set, get) => ({
         filteredCharacters: allCharacters,
         loading: false,
       });
-    } catch (error) {
+    } catch {
       set({ error: 'Failed to fetch characters', loading: false });
     }
   },
@@ -47,14 +46,10 @@ export const useCharacterListStore = create<CharacterListState>((set, get) => ({
 
     const lowerQuery = query.toLowerCase();
 
-    let filtered = characters.filter((char) =>
-      char.name.toLowerCase().startsWith(lowerQuery),
-    );
+    let filtered = characters.filter((char) => char.name.toLowerCase().startsWith(lowerQuery));
 
     if (filtered.length === 0) {
-      filtered = characters.filter((char) =>
-        char.name.toLowerCase().includes(lowerQuery),
-      );
+      filtered = characters.filter((char) => char.name.toLowerCase().includes(lowerQuery));
     }
 
     set({ filteredCharacters: filtered });

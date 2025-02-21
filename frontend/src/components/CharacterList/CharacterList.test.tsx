@@ -14,7 +14,7 @@ describe('CharacterList', () => {
     render(
       <MemoryRouter>
         <CharacterList characters={mockCharacters} />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getAllByRole('img')).toHaveLength(50);
@@ -25,7 +25,7 @@ describe('CharacterList', () => {
     render(
       <MemoryRouter>
         <CharacterList characters={[]} />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText('No characters available')).toBeInTheDocument();

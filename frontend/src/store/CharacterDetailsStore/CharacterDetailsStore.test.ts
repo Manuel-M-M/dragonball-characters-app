@@ -38,9 +38,7 @@ describe('CharacterDetailStore', () => {
     });
 
     await waitFor(() => {
-      expect(useCharacterDetailsStore.getState().character).toEqual(
-        mockCharacter,
-      );
+      expect(useCharacterDetailsStore.getState().character).toEqual(mockCharacter);
     });
 
     expect(useCharacterDetailsStore.getState().loading).toBe(false);
@@ -66,9 +64,7 @@ describe('CharacterDetailStore', () => {
 
     expect(useCharacterDetailsStore.getState().character).toBeNull();
     expect(useCharacterDetailsStore.getState().loading).toBe(false);
-    expect(useCharacterDetailsStore.getState().error).toBe(
-      'Character not found',
-    );
+    expect(useCharacterDetailsStore.getState().error).toBe('Character not found');
   });
 
   it('should set loading to true while fetching', async () => {

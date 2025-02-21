@@ -16,7 +16,7 @@ describe('CharacterDetails Component', () => {
     render(
       <MemoryRouter>
         <CharacterDetails character={mockCharacter} />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     expect(screen.getByText('Goku')).toBeInTheDocument();
     expect(screen.getByText('A powerful Saiyan warrior.')).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('CharacterDetails Component', () => {
     render(
       <MemoryRouter>
         <CharacterDetails character={null} />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
     expect(screen.getByText('Character not found')).toBeInTheDocument();
   });

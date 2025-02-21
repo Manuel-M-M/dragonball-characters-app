@@ -274,7 +274,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.0",
-    "eslint": "^9.20.1",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
@@ -295,7 +295,7 @@
     "start": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
-    "format": "prettier --write 'src/**/*.{js,ts,tsx}'",
+    "format": "prettier --config .prettierrc --write 'src/**/*.{js,ts,tsx}'",
     "test": "jest"
   },
   "repository": {

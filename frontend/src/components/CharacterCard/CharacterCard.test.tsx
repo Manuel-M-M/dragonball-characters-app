@@ -30,7 +30,7 @@ describe('CharacterCard', () => {
           name={mockCharacter.name}
           image={mockCharacter.image}
         />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByText(mockCharacter.name)).toBeInTheDocument();
@@ -47,7 +47,7 @@ describe('CharacterCard', () => {
           name={mockCharacter.name}
           image={mockCharacter.image}
         />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(screen.getByTestId('favorite-icon')).toBeInTheDocument();
@@ -69,22 +69,17 @@ describe('CharacterCard', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
-          <Route
-            path="/"
-            element={<CharacterCard id={1} name="Goku" image="goku.webp" />}
-          />
+          <Route path="/" element={<CharacterCard id={1} name="Goku" image="goku.webp" />} />
           <Route path="/character/:id" element={<CharacterDetailsPage />} />
         </Routes>
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     const image = screen.getByAltText('Goku');
     expect(image).toBeInTheDocument();
 
-    console.log('👉 Clicking on image...');
     await userEvent.click(image);
 
-    console.log('🔎 Checking for character name in details page...');
     await waitFor(() => {
       expect(screen.getByText('Goku')).toBeInTheDocument();
     });

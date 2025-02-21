@@ -16,6 +16,7 @@ const ResumeContainer = styled.section`
   margin: 0 auto;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 98% 100%, 0 100%);
+  height: 607.89px;
 
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
@@ -36,6 +37,7 @@ const ResumeContent = styled.div`
     @media (max-width: ${theme.breakpoints.md}) {
       flex-direction: column;
       width: 100%;
+      height: auto;
     }
   `}
 `;
@@ -48,7 +50,8 @@ const CharacterImage = styled.img`
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
       width: 100%;
-      height: 160px;
+      height: auto;
+      max-height: 400px;
     }
   `}
 `;
@@ -68,7 +71,6 @@ const InfoContainer = styled.div`
       padding: 24px;
       text-align: center;
       height: auto;
-      gap: 18px;
     }
   `}
 `;
@@ -82,7 +84,8 @@ const TitleRow = styled.div`
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
       flex-direction: row;
-      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
     }
   `}
 `;
@@ -102,7 +105,7 @@ const CharacterName = styled.h2`
     @media (max-width: ${theme.breakpoints.md}) {
       font-size: 32px;
       width: auto;
-      text-align: center;
+      text-align: left;
     }
   `}
 `;
@@ -113,16 +116,12 @@ const HeartIconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  svg {
-    width: 100% !important;
-    height: 100% !important;
-  }
+  margin-left: auto;
 `;
 
 const CharacterDescription = styled.p`
   width: 529px;
-  height: 57px;
+  height: auto;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -131,12 +130,14 @@ const CharacterDescription = styled.p`
   margin: 0;
   letter-spacing: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
       width: 100%;
-      font-size: 14px;
-      text-align: center;
+      font-size: 16px;
+      text-align: left;
     }
   `}
 `;
