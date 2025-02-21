@@ -1,16 +1,37 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import React, { lazy, useEffect, Suspense } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import { CharactersListPage } from './pages/CharactersListPage/CharactersListPage';
-import { FavoritesListPage } from './pages/FavoritesListPage/FavoritesListPage';
-import { CharacterDetailsPage } from './pages/CharacterDetailsPage/CharacterDetailsPage';
 import { GlobalStyles } from './styles/globalStyles';
 import { Header } from './components/Header/Header';
+
+const CharactersListPage = lazy(() =>
+  import('./pages/CharactersListPage/CharactersListPage').then((m) => ({
+    default: m.CharactersListPage,
+  })),
+);
+const FavoritesListPage = lazy(() =>
+  import('./pages/FavoritesListPage/FavoritesListPage').then((m) => ({
+    default: m.FavoritesListPage,
+  })),
+);
+const CharacterDetailsPage = lazy(() =>
+  import('./pages/CharacterDetailsPage/CharacterDetailsPage').then((m) => ({
+    default: m.CharacterDetailsPage,
+  })),
+);
+
+const theme = {
+  breakpoints: {
+    sm: '480px',
+    md: '768px',
+    lg: '1024px',
+  },
+};
 
 const AppContainer = styled.div`
   width: 100%;
@@ -28,6 +49,7 @@ const MainContent = styled.main`
 `;
 
 import { useLocation } from 'react-router-dom';
+import { Loader } from './components/Loader/Loader';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -41,21 +63,44 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <GlobalStyles />
-      <AppContainer className="AppContainer">
-        <Header />
-        <MainContent className="MainContent-App">
-          <Routes>
-            <Route path="/" element={<Navigate to="/characters" />} />
-            <Route path="/characters" element={<CharactersListPage />} />
-            <Route path="/favorites" element={<FavoritesListPage />} />
-            <Route path="/character/:id" element={<CharacterDetailsPage />} />
-          </Routes>
-        </MainContent>
-      </AppContainer>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <ScrollToTop />
+        <GlobalStyles />
+        <AppContainer className="AppContainer">
+          <Header />
+          <MainContent className="MainContent-App">
+            <Routes>
+              <Route path="/" element={<Navigate to="/characters" />} />
+              <Route
+                path="/characters"
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <CharactersListPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <FavoritesListPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/character/:id"
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <CharacterDetailsPage />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </MainContent>
+        </AppContainer>
+      </Router>
+    </ThemeProvider>
   );
 };
 

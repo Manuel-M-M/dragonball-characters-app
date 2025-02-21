@@ -55,7 +55,11 @@ export const Header = () => {
   return (
     <Navbar>
       <Logo
-        src="/images/dragon-ball-logo.png"
+        src="/images/dragon-ball-logo.webp"
+        onError={(e) => {
+          e.currentTarget.src =
+            'https://upload.wikimedia.org/wikipedia/commons/7/79/Dragon_Ball_Logo.png';
+        }}
         alt="Dragon Ball Logo"
         onClick={() => navigate('/characters')}
       />

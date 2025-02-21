@@ -2,6 +2,7 @@ import { CacheManager } from '../utils/cache';
 
 export class CharactersRepository {
   private readonly CACHE_DURATION = 24 * 60 * 60 * 1000;
+  private readonly API_URL = process.env.API_URL || 'http://localhost:5000/api';
 
   async getCharacters(page: number = 1, limit: number = 50) {
     const cacheKey = `characters_page_${page}_limit_${limit}`;
@@ -17,7 +18,7 @@ export class CharactersRepository {
 
     console.log('🔴 Fetching characters from API');
     const response = await fetch(
-      `http://localhost:5000/api/characters?page=${page}&limit=${limit}`,
+      `${this.API_URL}/characters?page=${page}&limit=${limit}`,
     );
 
     if (!response.ok) throw new Error('Failed to fetch characters');
@@ -35,10 +36,12 @@ export class CharactersRepository {
     );
 
     if (cachedCharacter) {
+      console.log(`🟢 Serving character ${id} from cache`);
       return cachedCharacter;
     }
 
-    const response = await fetch(`http://localhost:5000/api/characters/${id}`);
+    console.log(`🔴 Fetching character ${id} from API`);
+    const response = await fetch(`${this.API_URL}/characters/${id}`);
 
     if (!response.ok)
       throw new Error(`Failed to fetch character with ID ${id}`);

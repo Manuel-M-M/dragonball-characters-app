@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["DOM", "ESNext"],
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "outDir": "./dist",
