@@ -8,22 +8,22 @@ interface SearchBarProps {
 }
 
 const SearchContainer = styled.div`
-  width: 100%;
-  max-width: 1416px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+  max-width: 1416px;
   padding-left: 48px;
   padding-right: 68px;
-  margin-bottom: 16px;
+  width: 100%;
 `;
 
 const SearchWrapper = styled.div`
-  display: flex;
   align-items: center;
-  gap: 10px;
   border-bottom: 1px solid black;
+  display: flex;
+  gap: 10px;
   padding-bottom: 8px;
 `;
 
@@ -31,21 +31,21 @@ const SearchIcon = styled(FaSearch)`
   color: black;
   font-size: 12px;
   font-weight: 400;
-  line-height: 12px;
   letter-spacing: 0;
+  line-height: 12px;
 `;
 
 const SearchInput = styled.input`
-  flex: 1;
+  background-color: #fff;
   border: none;
-  outline: none;
-  font-family: 'roboto-condensed', sans-serif;
+  color: black;
+  flex: 1;
+  font-family: roboto-condensed, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: black;
-  background-color: #ffffff;
-  line-height: 18.75px;
   letter-spacing: 0;
+  line-height: 18.75px;
+  outline: none;
   text-transform: uppercase;
 
   &::placeholder {
@@ -55,11 +55,11 @@ const SearchInput = styled.input`
 
 const SearchCounter = styled.span`
   color: black;
-  font-family: 'roboto-condensed', sans-serif;
+  font-family: roboto-condensed, sans-serif;
   font-size: 12px;
   font-weight: 400;
-  line-height: 14.06px;
   letter-spacing: 0;
+  line-height: 14.06px;
 `;
 
 export const SearchBar: React.FC<SearchBarProps> = ({ resultsCount }) => {

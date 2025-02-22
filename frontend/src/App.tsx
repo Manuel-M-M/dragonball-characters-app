@@ -23,24 +23,23 @@ const CharacterDetailsPage = lazy(() =>
 const theme = {
   breakpoints: {
     sm: '480px',
-    md: '768px',
+    md: '913px',
     lg: '1024px',
   },
 };
 
 const AppContainer = styled.div`
-  width: 100%;
-  height: 1182px
-  background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
+  height: 1182px
   overflow-x: hidden;
+  width: 100%;
 `;
 
 const MainContent = styled.main`
   flex: 1;
-  width: 100%;
   justify-content: center;
+  width: 100%;
 `;
 
 import { useLocation } from 'react-router-dom';

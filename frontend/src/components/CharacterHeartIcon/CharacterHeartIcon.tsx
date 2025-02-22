@@ -7,12 +7,12 @@ interface CharacterHeartIconProps {
 }
 
 const HeartIconContainer = styled.div<{ $isFavorite: boolean }>`
-  width: 24px;
-  height: 22.84px;
-  display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
+  display: flex;
+  height: 22.84px;
+  justify-content: center;
+  width: 24px;
 
   svg {
     fill: ${(props) => (props.$isFavorite ? '#EC1D24' : 'none')};

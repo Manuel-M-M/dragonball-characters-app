@@ -7,19 +7,19 @@ interface CharacterListProps {
 
 const CharactersListWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));
   gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(188px, 1fr));
+  margin: 0 auto;
+  max-width: 1512px;
   padding: 0 48px;
   width: 100%;
-  max-width: 1512px;
-  margin: 0 auto;
 `;
 
 const NoCharacters = styled.p`
-  text-align: center;
-  font-size: 18px;
   color: gray;
+  font-size: 18px;
   margin-top: 20px;
+  text-align: center;
 `;
 
 export const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {

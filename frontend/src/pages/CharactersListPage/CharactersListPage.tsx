@@ -6,22 +6,22 @@ import { Loader } from '../../components/Loader/Loader';
 import styled from 'styled-components';
 
 const CharactersListContainer = styled.section`
-  width: 100%;
-  max-width: 1416px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin: 0 auto;
+  max-width: 1416px;
   padding: 84px 0;
+  width: 100%;
 `;
 
 const ErrorMessage = styled.p`
+  color: #999;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
-  color: #999;
   margin-top: 200px;
+  text-align: center;
 `;
 
 export const CharactersListPage = () => {

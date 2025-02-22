@@ -8,19 +8,19 @@ interface CharacterResumeProps {
 }
 
 const ResumeContainer = styled.section`
-  width: 100%;
+  background-color: #000;
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 98% 100%, 0 100%);
+  color: #fff;
   display: flex;
   justify-content: center;
-  background-color: #000;
-  color: #fff;
   margin: 0 auto;
   position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 98% 100%, 0 100%);
-
+  width: 100%;
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
-      flex-direction: column;
       align-items: center;
+      clip-path: polygon(0 0, 100% 0, 100% 92%, 92% 100%, 0 100%);
+      flex-direction: column;
     }
   `}
 `;
@@ -74,69 +74,68 @@ const InfoContainer = styled.div`
 `;
 
 const TitleRow = styled.div`
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 
   ${({ theme }) => css`
-    @media (max-width: ${theme.breakpoints.md}) {
-      flex-direction: row;
-      gap: 12px;
-    }
+    @media (max-width: ${theme.breakpoints.sm}) {
+      gap: 80px
+      justify-content: center;
   `}
 `;
 
 const CharacterName = styled.h2`
-  width: 272px;
-  height: 47px;
+  color: #fff;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 40px;
   font-weight: 700;
+  height: 47px;
   line-height: 46.88px;
   letter-spacing: 0;
-  color: #fff;
   margin: 0;
+  width: 272px;
 
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
       font-size: 32px;
-      width: auto;
       text-align: center;
+      width: auto;
     }
   `}
 `;
 
 const HeartIconWrapper = styled.div`
-  width: 32px;
-  height: 32px;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 32px;
   justify-content: center;
+  width: 32px;
 
   svg {
-    width: 100% !important;
     height: 100% !important;
+    width: 100% !important;
   }
 `;
 
 const CharacterDescription = styled.p`
-  width: 529px;
-  height: 57px;
+  color: #fff;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   font-weight: 400;
+  height: 57px;
   line-height: 18.75px;
-  color: #fff;
-  margin: 0;
   letter-spacing: 0;
+  margin: 0;
   overflow: hidden;
+  width: 529px;
 
   ${({ theme }) => css`
     @media (max-width: ${theme.breakpoints.md}) {
-      width: 100%;
       font-size: 14px;
       text-align: center;
+      width: 100%;
     }
   `}
 `;

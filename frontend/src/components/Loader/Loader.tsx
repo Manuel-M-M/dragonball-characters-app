@@ -7,19 +7,19 @@ const spin = keyframes`
 `;
 
 const LoaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   height: 100vh;
+  justify-content: center;
 `;
 
 const Spinner = styled.div`
-  width: 150px;
-  height: 150px;
-  border: 15px solid rgba(0, 0, 0, 0.1);
-  border-top: 15px solid black;
-  border-radius: 50%;
   animation: ${spin} 1s linear infinite;
+  border: 15px solid rgb(0 0 0 / 10%);
+  border-radius: 50%;
+  border-top: 15px solid black;
+  height: 150px;
+  width: 150px;
 `;
 
 export const Loader: React.FC = () => (

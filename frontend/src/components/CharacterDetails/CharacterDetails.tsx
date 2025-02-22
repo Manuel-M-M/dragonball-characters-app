@@ -9,20 +9,20 @@ interface CharacterDetailsProps {
 }
 
 const DetailsContainer = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
   margin: auto;
+  width: 100%;
 `;
 
 const NoTransformationsMessage = styled.p`
+  color: #999;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
-  color: #999;
   margin-top: 200px;
+  text-align: center;
 `;
 
 export const CharacterDetails: React.FC<CharacterDetailsProps> = ({ character }) => (

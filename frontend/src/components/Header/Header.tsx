@@ -3,48 +3,48 @@ import { useNavigate } from 'react-router-dom';
 import { useFavoritesStore } from '../../store/FavoritesStore/favoritesStore';
 
 const Navbar = styled.nav`
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: black;
-  padding: 16px 48px;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
   overflow-x: hidden;
+  padding: 16px 48px;
 `;
 
 const Logo = styled.img`
-  width: 130px;
-  height: 52px;
   cursor: pointer;
+  height: 52px;
+  width: 130px;
 `;
 
 const FavoritesContainer = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 8px;
 `;
 
 const HeartIcon = styled.div`
-  width: 24px;
-  height: 21.68px;
-  display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
+  display: flex;
+  height: 21.68px;
+  justify-content: center;
+  width: 24px;
 
   svg {
     fill: #ec1d24;
+    height: 21.68px;
     stroke: #ec1d24;
     width: 24px;
-    height: 21.68px;
   }
 `;
 
 const FavoritesCount = styled.span`
+  color: white;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: white;
   line-height: 18.75px;
 `;
 

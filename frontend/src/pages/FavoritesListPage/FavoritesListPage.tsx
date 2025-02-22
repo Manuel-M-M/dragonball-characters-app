@@ -6,32 +6,32 @@ import { styled } from 'styled-components';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 
 const FavoritesListPageContainer = styled.div`
-  width: 100%;
-  max-width: 1416px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin: 0 auto;
+  max-width: 1416px;
   padding: 84px 0;
   padding-top: 48px;
+  width: 100%;
 `;
 
 const Title = styled.h2`
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  text-transform: uppercase;
   margin-bottom: 16px;
   padding-left: 48px;
+  text-transform: uppercase;
 `;
 
 const NoFavoritesAndErrorMessage = styled.p`
+  color: #999;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
-  color: #999;
   margin-top: 200px;
+  text-align: center;
 `;
 
 export const FavoritesListPage = () => {

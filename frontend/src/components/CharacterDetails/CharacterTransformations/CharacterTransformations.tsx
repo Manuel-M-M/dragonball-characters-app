@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Transformation } from '../../../interfaces';
 
 interface CharacterTransformationProps {
@@ -7,70 +7,97 @@ interface CharacterTransformationProps {
 }
 
 const TransformationContainer = styled.section`
-  height: 526.8px;
-  width: 960px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 24px;
+  height: 526.8px;
+  justify-content: center;
   margin: 0 auto;
   padding: 32px 0;
+  width: 960px;
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.breakpoints.md}) {
+      align-items: center;
+      width: 100%;
+    }
+  `}
 `;
 
 const Title = styled.h2`
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  text-transform: uppercase;
   margin-bottom: 16px;
+  text-transform: uppercase;
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.breakpoints.md}) {
+      font-size: 18px;
+    }
+  `}
 `;
 
 const TransformationList = styled.div`
   display: flex;
+  flex-wrap: nowrap; /* ✅ Evita que los elementos se envuelvan */
+  gap: 16px;
   justify-content: center;
+  min-width: 960px;
   overflow-x: scroll;
   overscroll-behavior-x: contain;
+  padding-bottom: 0 20px 10px 20px;
   scroll-snap-type: x proximity;
-  gap: 16px;
-  padding-bottom: 10px;
-  flex-wrap: nowrap; /* ✅ Evita que los elementos se envuelvan */
-  min-width: 960px;
 
-  /* ✅ Scrollbar Estilizado */
   &::-webkit-scrollbar {
-    height: 6px;
-    background: #d9d9d9; /* Barra gris */
+    background: #d9d9d9;
     border-radius: 3px;
+    height: 6px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #ec1d24; /* Scroll deslizante en rojo */
+    background: #ec1d24;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #8b0000; /* Oscurece un poco cuando se pasa el mouse */
+    background: #8b0000;
   }
 
   &::-webkit-scrollbar-track {
-    background: ##d9d9d9; /* Color gris de fondo */
+    background: ##d9d9d9;
     border-radius: 3px;
   }
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.breakpoints.md}) {
+      font-size: 14px;
+      min-width: 350px;
+      text-align: center;
+      width: 500px;
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: ${theme.breakpoints.sm}) {
+      font-size: 14px;
+      min-width: 200px;
+      width: 350px;
+  `}
 `;
 
 const TransformationCard = styled.div`
   flex: 0 0 auto;
-  width: 150px;
-  text-align: center;
   position: relative;
   scroll-snap-align: center;
+  text-align: center;
+  width: 150px;
 `;
 
 const TransformationImage = styled.img`
-  width: 100%;
+  border-radius: 8px;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
+  width: 100%;
 `;
 
 const TransformationName = styled.h3`
@@ -80,8 +107,8 @@ const TransformationName = styled.h3`
 `;
 
 const KiText = styled.p`
-  font-size: 14px;
   color: gray;
+  font-size: 14px;
 `;
 
 export const CharacterTransformation: React.FC<CharacterTransformationProps> = ({

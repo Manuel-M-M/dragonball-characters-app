@@ -6,20 +6,20 @@ import styled from 'styled-components';
 import { CharacterDetails } from '../../components/CharacterDetails/CharacterDetails';
 
 const CharacterDetailsContainer = styled.section`
-  width: 100%;
-  margin: 0 auto;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   min-height: 100vh;
+  width: 100%;
 `;
 
 const ErrorMessage = styled.p`
+  color: #999;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
-  color: #999;
   margin-top: 200px;
+  text-align: center;
 `;
 
 export const CharacterDetailsPage = () => {
