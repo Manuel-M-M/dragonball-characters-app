@@ -142,19 +142,17 @@ const CharacterDescription = styled.p`
 
 export const CharacterResume: React.FC<CharacterResumeProps> = ({ character }) => {
   return (
-    <ResumeContainer className="ResumeContainer">
-      <ResumeContent className="ResumeContent">
-        <CharacterImage src={character.image} alt={character.name} className="CharacterImage" />
-        <InfoContainer className="InfoContainer">
-          <TitleRow className="TitleRow">
-            <CharacterName className="CharacterName">{character.name}</CharacterName>
+    <ResumeContainer>
+      <ResumeContent>
+        <CharacterImage src={character.image} alt={character.name} />
+        <InfoContainer>
+          <TitleRow>
+            <CharacterName>{character.name}</CharacterName>
             <HeartIconWrapper>
               <CharacterHeartIcon characterId={character.id} />
             </HeartIconWrapper>
           </TitleRow>
-          <CharacterDescription className="CharacterDescription">
-            {character.description}
-          </CharacterDescription>
+          <CharacterDescription>{character.description}</CharacterDescription>
         </InfoContainer>
       </ResumeContent>
     </ResumeContainer>

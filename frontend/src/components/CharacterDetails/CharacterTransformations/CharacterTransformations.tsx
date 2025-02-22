@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Transformation } from '../../../interfaces';
+import { sortTransformationsByKi } from '../../../utils/kiTransformationsSorter';
 
 interface CharacterTransformationProps {
   transformations: Transformation[];
@@ -42,7 +43,6 @@ const TransformationList = styled.div`
   display: flex;
   flex-wrap: nowrap; /* ✅ Evita que los elementos se envuelvan */
   gap: 16px;
-  justify-content: center;
   min-width: 960px;
   overflow-x: scroll;
   overscroll-behavior-x: contain;
@@ -114,25 +114,17 @@ const KiText = styled.p`
 export const CharacterTransformation: React.FC<CharacterTransformationProps> = ({
   transformations,
 }) => {
-  const sortedTransformations = [...transformations].sort(
-    (a, b) => parseFloat(b.ki.replace(/\D/g, '')) - parseFloat(a.ki.replace(/\D/g, ''))
-  );
+  const sortedTransformations = sortTransformationsByKi(transformations);
 
   return (
-    <TransformationContainer className="TransformationContainer">
-      <Title className="Title">Transformations</Title>
-      <TransformationList className="TransformationList">
+    <TransformationContainer>
+      <Title>Transformations</Title>
+      <TransformationList>
         {sortedTransformations.map((transformation) => (
-          <TransformationCard key={transformation.id} className="TransformationCard">
-            <TransformationImage
-              src={transformation.image}
-              alt={transformation.name}
-              className="TransformationImage"
-            />
-            <TransformationName className="TransformationName">
-              {transformation.name}
-            </TransformationName>
-            <KiText className="KiText">KI: {transformation.ki}</KiText>
+          <TransformationCard key={transformation.id}>
+            <TransformationImage src={transformation.image} alt={transformation.name} />
+            <TransformationName>{transformation.name}</TransformationName>
+            <KiText>KI: {transformation.ki}</KiText>
           </TransformationCard>
         ))}
       </TransformationList>

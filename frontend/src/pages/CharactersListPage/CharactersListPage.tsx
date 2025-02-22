@@ -35,7 +35,7 @@ export const CharactersListPage = () => {
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
 
   return (
-    <CharactersListContainer className="CharactersListContainer">
+    <CharactersListContainer>
       <SearchBar resultsCount={filteredCharacters.length} />
       <CharacterList characters={filteredCharacters} />
     </CharactersListContainer>

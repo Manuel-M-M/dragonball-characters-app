@@ -28,7 +28,7 @@ export const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   }
 
   return (
-    <CharactersListWrapper className="CharactersListWrapper">
+    <CharactersListWrapper>
       {characters.map((char) =>
         char?.id && char?.name && char?.image ? (
           <CharacterCard key={char.id} id={char.id} name={char.name} image={char.image} />

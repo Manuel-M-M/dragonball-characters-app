@@ -61,9 +61,9 @@ const App: React.FC = () => {
       <Router>
         <ScrollToTop />
         <GlobalStyles />
-        <AppContainer className="AppContainer">
+        <AppContainer>
           <Header />
-          <MainContent className="MainContent-App">
+          <MainContent>
             <Routes>
               <Route path="/" element={<Navigate to="/characters" />} />
               <Route

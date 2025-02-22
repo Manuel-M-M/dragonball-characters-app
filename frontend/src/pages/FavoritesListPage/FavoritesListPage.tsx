@@ -45,8 +45,8 @@ export const FavoritesListPage = () => {
   if (error) return <NoFavoritesAndErrorMessage>{error}</NoFavoritesAndErrorMessage>;
 
   return (
-    <FavoritesListPageContainer className="FavoritesListPageContainer">
-      <Title className="tITTLE">FAVORITES</Title>
+    <FavoritesListPageContainer>
+      <Title>FAVORITES</Title>
       <SearchBar resultsCount={favoriteCharacters.length} />
       {favoriteCharacters.length > 0 ? (
         <CharacterList characters={favoriteCharacters} />

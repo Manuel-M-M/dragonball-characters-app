@@ -37,7 +37,7 @@ export const CharacterDetailsPage = () => {
   }, [stableFetchCharacterById]);
 
   return (
-    <CharacterDetailsContainer className="CharacterDetailsContainer">
+    <CharacterDetailsContainer>
       {loading && <Loader />}
       {error ? (
         <ErrorMessage>{error}</ErrorMessage>

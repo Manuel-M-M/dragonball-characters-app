@@ -26,7 +26,7 @@ const NoTransformationsMessage = styled.p`
 `;
 
 export const CharacterDetails: React.FC<CharacterDetailsProps> = ({ character }) => (
-  <DetailsContainer className="DetailsContainer">
+  <DetailsContainer>
     {character ? (
       <>
         <CharacterResume character={character} />
