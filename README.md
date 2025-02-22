@@ -129,3 +129,14 @@ User ---> Frontend (React + TS)
          ---> Dragon Ball API
          ---> Cache System (24h Expiration)
 ```
+
+## 🏗️ Architecture and Best Practices
+
+This application follows **Hexagonal Architecture**, ensuring a clear separation of concerns between the domain, application, and infrastructure layers. It is built with a strong adherence to **SOLID principles** and **Clean Code** best practices, promoting maintainability, scalability, and testability.
+
+By implementing these principles, the project achieves:
+
+- **Encapsulation of business logic** to avoid unnecessary dependencies.
+- **Decoupling between layers**, allowing flexibility in adapting new technologies.
+- **High testability**, ensuring a reliable and robust application.
+- **Readability and maintainability**, making it easier for developers to contribute and extend functionality.
