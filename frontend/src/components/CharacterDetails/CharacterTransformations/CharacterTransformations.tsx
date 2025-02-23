@@ -41,7 +41,7 @@ const Title = styled.h2`
 
 const TransformationList = styled.div`
   display: flex;
-  flex-wrap: nowrap; /* ✅ Evita que los elementos se envuelvan */
+  flex-wrap: nowrap;
   gap: 16px;
   min-width: 960px;
   overflow-x: scroll;
