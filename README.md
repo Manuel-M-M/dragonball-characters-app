@@ -109,7 +109,7 @@ serve -s dist
 
 ## ✅ Testing
 
-###Run tests for both frontend and backend:
+### Run tests for both frontend and backend:
 
 ```sh
 # Backend
